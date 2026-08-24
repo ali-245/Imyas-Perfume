@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Imyas Perfumes | Best Luxury Fragrances & Perfumes in Pakistan</title>
+    <title>Imyas Perfumes | Best Luxury Fragrances & Perfumes in Pakistan</title>
     <meta name="google-site-verification" content="WRoWL4rTtDEvg8dgilh5OXHTF4AZCs_AYTl2DlYWCXw" />
    
-<meta name="description" content="Shop luxury perfumes, long-lasting fragrances, and premium attars at Imyas Perfumes. Order online with Cash on Delivery across Pakistan.">
-<meta name="keywords" content="Imyas Perfumes, perfumes in Pakistan, best fragrances Lahore, buy attar online">
+    <meta name="description" content="Shop luxury perfumes, long-lasting fragrances, and premium attars at Imyas Perfumes. Order online with Cash on Delivery across Pakistan.">
+    <meta name="keywords" content="Imyas Perfumes, perfumes in Pakistan, best fragrances Lahore, buy attar online">
     
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -185,8 +188,8 @@
             transform: translateY(-8px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
         }
-        .product-img-wrapper { position: relative; width: 100%; height: 300px; overflow: hidden; }
-        .product-img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .product-img-wrapper { position: relative; width: 100%; height: 300px; overflow: hidden; background: #fff; }
+        .product-img { width: 100%; height: 100%; object-fit: contain; transition: 0.6s; }
         .product-card:hover .product-img { transform: scale(1.08); }
         .tag-badge {
             position: absolute;
@@ -201,14 +204,14 @@
             border-radius: 6px;
             border: 1px solid var(--accent-gold);
             text-transform: uppercase;
+            z-index: 10;
         }
         
         .product-details { padding: 22px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .product-title { font-family: var(--font-heading); font-size: 22px; color: #fff; margin-bottom: 8px; }
         .product-notes { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.5; }
-        .product-price { font-size: 24px; font-weight: 800; color: var(--accent-gold); margin-bottom: 18px; }
 
-        .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
         .btn-add-cart {
             background: var(--bg-accent);
             border: 1px solid var(--border-color);
@@ -243,10 +246,9 @@
         
         .cart-body { padding: 22px; flex-grow: 1; overflow-y: auto; }
         .cart-item { display: flex; gap: 15px; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border-color); }
-        .cart-item img { width: 65px; height: 65px; object-fit: cover; border-radius: 8px; }
-        .cart-item-info { flex-grow: 1; }
+        .cart-item img { width: 65px; height: 65px; object-fit: cover; border-radius: 8px; background: #fff; }
+        .cart-item-info { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
         .cart-item-title { font-size: 15px; font-weight: 700; color: #fff; }
-        .cart-item-price { font-size: 15px; color: var(--accent-gold); font-weight: 700; }
         .remove-item { color: #ef4444; font-size: 12px; cursor: pointer; margin-top: 6px; display: inline-block; }
 
         .cart-footer { padding: 22px; border-top: 1px solid var(--border-color); }
@@ -292,7 +294,7 @@
 <body>
 
     <div class="announcement">
-        🚀 FREE DELIVERY IN LAHORE ON ORDERS LESS THAN PKR 1,000 | OUTSIDE LAHORE CHARGES | CASH ON DELIVERY
+        🚀 FREE DELIVERY IN LAHORE ON ORDERS OVER PKR 1,000 | STANDARD DELIVERY CHARGES APPLY OUTSIDE LAHORE | CASH ON DELIVERY
     </div>
 
     <header>
@@ -341,8 +343,8 @@
         <div class="cart-body" id="cart-body"></div>
         <div class="cart-footer">
             <div class="cart-total">
-                <span>Total Amount:</span>
-                <span id="cart-total-price">PKR 0</span>
+                <span>Total Items:</span>
+                <span id="cart-total-items">0</span>
             </div>
             <button class="btn-buy-instant" style="width: 100%; font-size: 15px;" onclick="openCheckoutModal()">Proceed to Order</button>
         </div>
@@ -382,29 +384,32 @@
     <footer>
         <p>&copy; 2026 <strong style="color: var(--accent-gold);">Imyas Perfumes</strong>. All Rights Reserved.</p>
         <p style="font-size: 12px; margin-top: 5px;">Support WhatsApp: +92 300 4315273</p>
+        <p style="font-size: 12px; margin-top: 5px;">Sales WhatsApp: +92 326 0539381</p>
     </footer>
 
     <script>
         const WHATSAPP_NUMBER = "923004315273";
+        const WHATSAP_NUMBER =  "923260539381";
 
-        const products = [
-            {
-                id: 1,
-                name: "Imyas Signature Oud",
-                price: 3999,
-                tag: "Best Seller",
-                notes: "Cambodian Oud, Warm Amber, Vanilla & Spicy Rose",
-                image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&q=80"
-            },
-            {
-                id: 2,
-                name: "Imyas Aqua Breeze",
-                price: 3499,
-                tag: "Summer Fresh",
-                notes: "Italian Bergamot, Ocean Marine Notes & White Musk",
-                image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&q=80"
-            }
-        ];
+        
+       
+const products = [
+    { id: 1, name: "Ameer Ul Uudd", tag: "Premium", notes: "Rich, Woody & Elegant", image: "ameer ul uudd.jpeg" },
+    { id: 2, name: "Asseel", tag: "Classic", notes: "Traditional Bold Scent", image: "asseel.jpeg" },
+    { id: 3, name: "Baka Raat", tag: "Luxury", notes: "Sweet Floral & Woody", image: "baka raat.jpeg" },
+    { id: 4, name: "Broot", tag: "Men's Classic", notes: "Fresh, Spicy & Aromatic", image: "broot.jpeg" },
+    { id: 5, name: "Chocolate", tag: "Sweet", notes: "Rich Gourmand Notes", image: "Choclate.jpeg" },
+    { id: 6, name: "Fog", tag: "Fresh", notes: "Cool & Refreshing Aqua", image: "fog.jpeg" },
+    { id: 7, name: "Galaf Kabha", tag: "Spiritual", notes: "Pure Oud & Musk", image: "galaf kabha.jpeg" },
+    { id: 8, name: "Gucci Rush", tag: "Designer", notes: "Fruity & Vibrant Floral", image: "guucci rush.jpeg" },
+    { id: 9, name: "Motia", tag: "Floral", notes: "Pure Jasmine Extract", image: "motia.jpeg" },
+    { id: 10, name: "Office Man", tag: "Everyday", notes: "Clean & Professional", image: "office man.jpeg" },
+    { id: 11, name: "Poison", tag: "Bold", notes: "Dark & Mysterious", image: "poison.jpeg" },
+    { id: 12, name: "Rooh Gulab", tag: "Floral", notes: "Premium Rose Extract", image: "rooh gulab.jpeg" },
+    { id: 13, name: "Safari", tag: "Adventure", notes: "Earthy, Woody & Strong", image: "safari.jpeg" },
+    { id: 14, name: "Tea Rozz", tag: "Fresh Floral", notes: "Light Rose & Green Tea", image: "tea rozz.jpeg" },
+    { id: 15, name: "Versachay Pink", tag: "Women's", notes: "Fresh, Fruity & Sweet", image: "versachay pink.jpeg" }
+];
 
         let cart = [];
 
@@ -425,10 +430,9 @@
                                 <p class="product-notes">${p.notes}</p>
                             </div>
                             <div>
-                                <div class="product-price">PKR ${p.price.toLocaleString()}</div>
                                 <div class="card-actions">
                                     <button class="btn-add-cart" onclick="addToCart(${p.id})">Add to Cart</button>
-                                    <button class="btn-buy-instant" onclick="buySingleProduct(${p.id})">Buy Now</button>
+                                    <button class="btn-buy-instant" onclick="buySingleProduct(${p.id})">Order Now</button>
                                 </div>
                             </div>
                         </div>
@@ -467,10 +471,9 @@
         function updateCartUI() {
             const cartCountEl = document.getElementById('cart-count');
             const cartBodyEl = document.getElementById('cart-body');
-            const cartTotalEl = document.getElementById('cart-total-price');
+            const cartTotalItemsEl = document.getElementById('cart-total-items');
 
             let totalQty = 0;
-            let totalPrice = 0;
 
             cartBodyEl.innerHTML = '';
 
@@ -479,14 +482,12 @@
             } else {
                 cart.forEach(item => {
                     totalQty += item.qty;
-                    totalPrice += (item.price * item.qty);
 
                     cartBodyEl.innerHTML += `
                         <div class="cart-item">
                             <img src="${item.image}" alt="${item.name}">
                             <div class="cart-item-info">
-                                <div class="cart-item-title">${item.name} (x${item.qty})</div>
-                                <div class="cart-item-price">PKR ${(item.price * item.qty).toLocaleString()}</div>
+                                <div class="cart-item-title">${item.name} (Qty: ${item.qty})</div>
                                 <span class="remove-item" onclick="removeFromCart(${item.id})">Remove</span>
                             </div>
                         </div>
@@ -495,7 +496,7 @@
             }
 
             cartCountEl.innerText = totalQty;
-            cartTotalEl.innerText = `PKR ${totalPrice.toLocaleString()}`;
+            cartTotalItemsEl.innerText = totalQty;
         }
 
         function toggleCart(forceOpen = false) {
@@ -535,12 +536,9 @@
             const address = document.getElementById('cust-address').value;
 
             let itemsSummary = "";
-            let grandTotal = 0;
 
             cart.forEach((item, index) => {
-                const itemTotal = item.price * item.qty;
-                grandTotal += itemTotal;
-                itemsSummary += `${index + 1}. *${item.name}* (Qty: ${item.qty}) = PKR ${itemTotal.toLocaleString()}\n`;
+                itemsSummary += `${index + 1}. *${item.name}* (Qty: ${item.qty})\n`;
             });
 
             const waMessage = 
@@ -548,7 +546,6 @@
 
 🛍️ *ORDERED ITEMS:*
 ${itemsSummary}
-💰 *TOTAL AMOUNT:* PKR ${grandTotal.toLocaleString()}
 💳 *PAYMENT METHOD:* Cash on Delivery (COD)
 
 ----------------------------------
@@ -559,7 +556,7 @@ ${itemsSummary}
 🏙️ *City:* ${city}
 🏠 *Complete Address:* ${address}
 
-Please confirm my order and send dispatch tracking info!`;
+Please confirm my order and share the total amount with delivery!`;
 
             const encodedURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`;
             window.open(encodedURL, '_blank');
