@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imyas Perfumes | Best Luxury Fragrances & Perfumes in Pakistan</title>
     <meta name="google-site-verification" content="WRoWL4rTtDEvg8dgilh5OXHTF4AZCs_AYTl2DlYWCXw" />
-   
+
     <meta name="description" content="Shop luxury perfumes, long-lasting fragrances, and premium attars at Imyas Perfumes. Order online with Cash on Delivery across Pakistan.">
     <meta name="keywords" content="Imyas Perfumes, perfumes in Pakistan, best fragrances Lahore, buy attar online">
-    
-    <!-- FontAwesome for Icons -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
 
     <style>
@@ -173,7 +170,7 @@
         .section-header h2 { font-family: var(--font-heading); font-size: 36px; margin-bottom: 10px; }
 
         .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 30px; }
-        
+
         .product-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -206,9 +203,10 @@
             text-transform: uppercase;
             z-index: 10;
         }
-        
+
         .product-details { padding: 22px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .product-title { font-family: var(--font-heading); font-size: 22px; color: #fff; margin-bottom: 8px; }
+        .product-title { font-family: var(--font-heading); font-size: 22px; color: #fff; margin-bottom: 4px; }
+        .product-price { font-size: 14px; font-weight: 700; color: var(--accent-gold); margin-bottom: 8px; }
         .product-notes { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.5; }
 
         .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
@@ -216,22 +214,26 @@
             background: var(--bg-accent);
             border: 1px solid var(--border-color);
             color: #fff;
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
             font-weight: 700;
+            font-size: 13px;
             cursor: pointer;
             transition: 0.3s;
+            text-align: center;
         }
         .btn-add-cart:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
         .btn-buy-instant {
             background: var(--accent-gold);
             color: #000;
             border: none;
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
             font-weight: 800;
+            font-size: 13px;
             cursor: pointer;
             transition: 0.3s;
+            text-align: center;
         }
         .btn-buy-instant:hover { background: #e0b86c; }
 
@@ -239,28 +241,31 @@
         .cart-drawer-overlay.active { opacity: 1; pointer-events: all; }
         .cart-drawer { position: fixed; top: 0; right: -420px; width: 100%; max-width: 420px; height: 100%; background: var(--bg-card); border-left: 1px solid var(--border-color); z-index: 2001; transition: 0.3s ease-in-out; display: flex; flex-direction: column; }
         .cart-drawer.active { right: 0; }
-        
+
         .cart-header { padding: 22px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
         .cart-header h3 { font-family: var(--font-heading); color: var(--accent-gold); }
         .close-cart { background: none; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer; }
-        
+
         .cart-body { padding: 22px; flex-grow: 1; overflow-y: auto; }
         .cart-item { display: flex; gap: 15px; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border-color); }
         .cart-item img { width: 65px; height: 65px; object-fit: cover; border-radius: 8px; background: #fff; }
         .cart-item-info { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
         .cart-item-title { font-size: 15px; font-weight: 700; color: #fff; }
-        .remove-item { color: #ef4444; font-size: 12px; cursor: pointer; margin-top: 6px; display: inline-block; }
+        .cart-item-price { font-size: 13px; color: var(--accent-gold); font-weight: 700; }
+        .remove-item { color: #ef4444; font-size: 12px; cursor: pointer; margin-top: 4px; display: inline-block; }
 
         .cart-footer { padding: 22px; border-top: 1px solid var(--border-color); }
         .cart-total { display: flex; justify-content: space-between; font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 18px; }
 
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 3000; display: none; align-items: center; justify-content: center; padding: 20px; }
         .modal-overlay.active { display: flex; }
-        .modal-content { background: var(--bg-card); border: 1px solid var(--accent-gold); border-radius: 16px; width: 100%; max-width: 500px; padding: 30px; position: relative; box-shadow: 0 0 30px var(--accent-gold-glow); }
-        .modal-title { font-family: var(--font-heading); font-size: 24px; color: var(--accent-gold); margin-bottom: 6px; text-align: center; }
-        .modal-subtitle { font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 22px; }
-        
-        .form-group { margin-bottom: 16px; }
+        .modal-content { background: var(--bg-card); border: 1px solid var(--accent-gold); border-radius: 16px; width: 100%; max-width: 480px; padding: 25px; position: relative; box-shadow: 0 0 30px var(--accent-gold-glow); max-height: 90vh; overflow-y: auto; }
+        .modal-title { font-family: var(--font-heading); font-size: 22px; color: var(--accent-gold); margin-bottom: 4px; text-align: center; }
+        .modal-subtitle { font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 15px; }
+
+        .modal-product-img { width: 100%; height: 220px; object-fit: contain; background: #fff; border-radius: 10px; margin-bottom: 15px; }
+
+        .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-gold); font-weight: 700; margin-bottom: 6px; }
         .form-control { width: 100%; background: var(--bg-primary); border: 1px solid var(--border-color); padding: 12px 14px; border-radius: 8px; color: #fff; font-size: 14px; outline: none; transition: 0.3s; }
         .form-control:focus { border-color: var(--accent-gold); }
@@ -326,14 +331,37 @@
         </div>
     </div>
 
+   
     <section class="catalog">
         <div class="section-header">
+            <span class="hero-badge" style="margin-bottom: 12px;"><i class="fa-solid fa-crown"></i> Elite Picks</span>
+            <h2 class="gold-text">Supreme & Signature Luxury</h2>
+            <p style="color: var(--text-muted);">Our finest, most exclusive high-end perfumes and rich concentrates</p>
+        </div>
+        <div class="products-grid" id="luxury-grid"></div>
+    </section>
+
+    
+    <section class="catalog" style="margin-top: 20px;">
+        <div class="section-header">
+            <span class="hero-badge" style="margin-bottom: 12px;"><i class="fa-solid fa-gift"></i> Gift Boxes & Specials</span>
+            <h2 class="gold-text">Exclusive Gift Box Collection</h2>
+            <p style="color: var(--text-muted);">Premium packaged gift sets and elite signature editions - PKR 350</p>
+        </div>
+        <div class="products-grid" id="giftbox-grid"></div>
+    </section>
+
+  
+    <section class="catalog" style="margin-top: 20px;">
+        <div class="section-header">
+            <span class="hero-badge" style="margin-bottom: 12px;"><i class="fa-solid fa-bottle-droplet"></i> Scent Inventory</span>
             <h2 class="gold-text">Exclusive Fragrance Collection</h2>
-            <p style="color: var(--text-muted);">Choose your scent and order instantly with full delivery details</p>
+            <p style="color: var(--text-muted);">Explore our diverse scent inventory</p>
         </div>
         <div class="products-grid" id="products-grid"></div>
     </section>
 
+    
     <div class="cart-drawer-overlay" id="cart-overlay" onclick="toggleCart()"></div>
     <div class="cart-drawer" id="cart-drawer">
         <div class="cart-header">
@@ -343,18 +371,46 @@
         <div class="cart-body" id="cart-body"></div>
         <div class="cart-footer">
             <div class="cart-total">
-                <span>Total Items:</span>
-                <span id="cart-total-items">0</span>
+                <span>Total Amount:</span>
+                <span id="cart-total-amount">PKR 0</span>
             </div>
             <button class="btn-buy-instant" style="width: 100%; font-size: 15px;" onclick="openCheckoutModal()">Proceed to Order</button>
         </div>
     </div>
 
+   
+    <div class="modal-overlay" id="options-modal">
+        <div class="modal-content">
+            <h3 class="modal-title" id="modal-product-name">Select Bottle Option</h3>
+            <p class="modal-subtitle" id="modal-product-desc">Choose your bottle size and quality grade</p>
+            <img id="modal-product-img" src="" alt="" class="modal-product-img">
+            
+            <div class="form-group">
+                <label>Select Bottle Type & Grade</label>
+                <select id="modal-variant-select" class="form-control" onchange="updateModalPrice()">
+                   
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Price</label>
+                <div id="modal-variant-price" style="font-size: 18px; font-weight: 800; color: var(--accent-gold); padding: 5px 0;">PKR 0</div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
+                <button type="button" class="btn-add-cart" onclick="addModalToCart()">Add to Bag</button>
+                <button type="button" class="btn-buy-instant" onclick="buyModalInstant()">Order Now</button>
+            </div>
+            <button type="button" onclick="closeOptionsModal()" style="width: 100%; background: none; border: none; color: var(--text-muted); margin-top: 12px; cursor: pointer; font-size: 13px;">Cancel</button>
+        </div>
+    </div>
+
+    
     <div class="modal-overlay" id="checkout-modal">
         <div class="modal-content">
-            <h3 class="modal-title">Shipping & Address Details</h3>
-            <p class="modal-subtitle">Enter your details below. Your order with your full address will automatically open in WhatsApp!</p>
-            
+            <h3 class="modal-title">Shipping & Order Details</h3>
+            <p class="modal-subtitle">Enter your details and select your preferred WhatsApp number to send your order!</p>
+
             <form id="checkout-form" onsubmit="submitOrder(event)">
                 <div class="form-group">
                     <label>Full Name</label>
@@ -369,12 +425,19 @@
                     <input type="text" id="cust-city" class="form-control" placeholder="e.g. Lahore, Karachi, Islamabad" required>
                 </div>
                 <div class="form-group">
-                    <label>Full Delivery Address</label>
-                    <textarea id="cust-address" class="form-control" rows="3" placeholder="House #, Street #, Sector/Area..." required></textarea>
+                    <label>Complete Delivery Address</label>
+                    <textarea id="cust-address" class="form-control" rows="2" placeholder="House #, Street #, Sector/Area..." required></textarea>
                 </div>
-                
+                <div class="form-group">
+                    <label>Select WhatsApp Number to Send Order</label>
+                    <select id="whatsapp-choice" class="form-control" required>
+                        <option value="923004315273">WhatsApp 1: +92 300 4315273</option>
+                        <option value="923260539381">WhatsApp 2: +92 326 0539381</option>
+                    </select>
+                </div>
+
                 <button type="submit" class="btn-submit-order">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> Send Order & Address via WhatsApp
+                    <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> Send Order via WhatsApp
                 </button>
                 <button type="button" onclick="closeCheckoutModal()" style="width: 100%; background: none; border: none; color: var(--text-muted); margin-top: 12px; cursor: pointer; font-size: 13px;">Cancel</button>
             </form>
@@ -383,40 +446,122 @@
 
     <footer>
         <p>&copy; 2026 <strong style="color: var(--accent-gold);">Imyas Perfumes</strong>. All Rights Reserved.</p>
-        <p style="font-size: 12px; margin-top: 5px;">Support WhatsApp: +92 300 4315273</p>
-        <p style="font-size: 12px; margin-top: 5px;">Sales WhatsApp: +92 326 0539381</p>
+        <p style="font-size: 12px; margin-top: 5px;">Support WhatsApp: +92 300 4315273 | Sales WhatsApp: +92 326 0539381</p>
     </footer>
 
     <script>
-        const WHATSAPP_NUMBER = "923004315273";
-        const WHATSAP_NUMBER =  "923260539381";
-
         
-       
-const products = [
-    { id: 1, name: "Ameer Ul Uudd", tag: "Premium", notes: "Rich, Woody & Elegant", image: "ameer ul uudd.jpeg" },
-    { id: 2, name: "Asseel", tag: "Classic", notes: "Traditional Bold Scent", image: "asseel.jpeg" },
-    { id: 3, name: "Baka Raat", tag: "Luxury", notes: "Sweet Floral & Woody", image: "baka raat.jpeg" },
-    { id: 4, name: "Broot", tag: "Men's Classic", notes: "Fresh, Spicy & Aromatic", image: "broot.jpeg" },
-    { id: 5, name: "Chocolate", tag: "Sweet", notes: "Rich Gourmand Notes", image: "Choclate.jpeg" },
-    { id: 6, name: "Fog", tag: "Fresh", notes: "Cool & Refreshing Aqua", image: "fog.jpeg" },
-    { id: 7, name: "Galaf Kabha", tag: "Spiritual", notes: "Pure Oud & Musk", image: "galaf kabha.jpeg" },
-    { id: 8, name: "Gucci Rush", tag: "Designer", notes: "Fruity & Vibrant Floral", image: "guucci rush.jpeg" },
-    { id: 9, name: "Motia", tag: "Floral", notes: "Pure Jasmine Extract", image: "motia.jpeg" },
-    { id: 10, name: "Office Man", tag: "Everyday", notes: "Clean & Professional", image: "office man.jpeg" },
-    { id: 11, name: "Poison", tag: "Bold", notes: "Dark & Mysterious", image: "poison.jpeg" },
-    { id: 12, name: "Rooh Gulab", tag: "Floral", notes: "Premium Rose Extract", image: "rooh gulab.jpeg" },
-    { id: 13, name: "Safari", tag: "Adventure", notes: "Earthy, Woody & Strong", image: "safari.jpeg" },
-    { id: 14, name: "Tea Rozz", tag: "Fresh Floral", notes: "Light Rose & Green Tea", image: "tea rozz.jpeg" },
-    { id: 15, name: "Versachay Pink", tag: "Women's", notes: "Fresh, Fruity & Sweet", image: "versachay pink.jpeg" }
-];
+        const bottleOptions = [
+            { name: "3 ML Bottle (Normal)", price: 200 },
+            { name: "3 ML Bottle (Special)", price: 350 },
+            { name: "6 ML Bottle (Normal)", price: 350 },
+            { name: "6 ML Bottle (Special)", price: 600 },
+            { name: "Tola Bottle (Normal)", price: 600 },
+            { name: "Tola Bottle (Special)", price: 1000 },
+            { name: "Plastic Bottle (Normal)", price: 150 },
+            { name: "Plastic Bottle (Special)", price: 250 }
+        ];
+
+        const luxuryProducts = [
+            { id: 101, name: "Turkey Gulab", tag: "Supreme", notes: "Exquisite Rich Turkish Rose Extract", image: "turkey gulab.jpeg" },
+            { id: 102, name: "White Oud", tag: "Supreme", notes: "Sublime Woody & Clean Oriental Scent", image: "white Aud.jpeg" },
+            { id: 103, name: "Silver", tag: "Luxury", notes: "Crisp, Metallic & Sophisticated", image: "silver.jpeg" },
+            { id: 104, name: "Cool Breeze", tag: "Signature", notes: "Refreshing Aquatic & Breezy Aura", image: "cool breeze.jpeg" },
+            { id: 105, name: "Jinnan", tag: "Supreme", notes: "Deep Traditional Royal Blend", image: "jinnan.jpeg" },
+            { id: 106, name: "Baka Raat Special", tag: "Elite", notes: "Intense Amber & Sweet Floral Sillage", image: "baka raat2.jpeg" },
+            { id: 107, name: "auud Spreme", tag: "Masterpiece", notes: "Pure Aged Concentrated Oud", image: "auud spreme.jpeg" }
+        ];
+
+        const giftBoxProducts = [
+            { id: 201, name: "Silver Box", tag: "Gift Set", price: 350, notes: "Exquisite Presentation & Fragrance", image: "silver box.jpeg" },
+            { id: 202, name: "Dun Hill", tag: "Classic", price: 350, notes: "Refined & Sophisticated Gentlemanly Scent", image: "dun hill.jpeg" },
+            { id: 203, name: "Sultan", tag: "Royal", price: 350, notes: "Majestic Oriental Blend", image: "sultan.jpeg" },
+            { id: 204, name: "Blue Oud", tag: "Exclusive", price: 350, notes: "Deep Aquatic Notes with Rich Oud", image: "blue aud.jpeg" },
+            { id: 205, name: "D Loves Attar", tag: "Special Edition", price: 350, notes: "Romance & Deep Sensual Notes", image: "D loves attar.jpeg" },
+            { id: 206, name: "Ateeq", tag: "Heritage", price: 350, notes: "Traditional Timeless Arabian Attar", image: "Ateeq.jpeg" },
+            { id: 207, name: "Black Boss", tag: "Power", price: 350, notes: "Bold, Intense & Dominant", image: "black boss.jpeg" },
+            { id: 208, name: "Galaf E Kabha Box", tag: "Collector's Box", price: 350, notes: "Sacred & Pure Luxurious Essence", image: "Galaf e kabha box.jpeg" }
+        ];
+
+        const products = [
+            { id: 1, name: "Ameer Ul Uudd", tag: "Premium", notes: "Rich, Woody & Elegant", image: "ameer ul uudd.jpeg" },
+            { id: 2, name: "Asseel", tag: "Classic", notes: "Traditional Bold Scent", image: "asseel.jpeg" },
+            { id: 3, name: "Baka Raat", tag: "Luxury", notes: "Sweet Floral & Woody", image: "baka raat.jpeg" },
+            { id: 4, name: "Broot", tag: "Men's Classic", notes: "Fresh, Spicy & Aromatic", image: "broot.jpeg" },
+            { id: 5, name: "Chocolate", tag: "Sweet", notes: "Rich Gourmand Notes", image: "Choclate.jpeg" },
+            { id: 6, name: "Fog", tag: "Fresh", notes: "Cool & Refreshing Aqua", image: "fog.jpeg" },
+            { id: 7, name: "Galaf Kabha", tag: "Spiritual", notes: "Pure Oud & Musk", image: "galaf kabha.jpeg" },
+            { id: 8, name: "Gucci Rush", tag: "Designer", notes: "Fruity & Vibrant Floral", image: "guucci rush.jpeg" },
+            { id: 9, name: "Motia", tag: "Floral", notes: "Pure Jasmine Extract", image: "motia.jpeg" },
+            { id: 10, name: "Office Man", tag: "Everyday", notes: "Clean & Professional", image: "office man.jpeg" },
+            { id: 11, name: "Poison", tag: "Bold", notes: "Dark & Mysterious", image: "poison.jpeg" },
+            { id: 12, name: "Rooh Gulab", tag: "Floral", notes: "Premium Rose Extract", image: "rooh gulab.jpeg" },
+            { id: 13, name: "Safari", tag: "Adventure", notes: "Earthy, Woody & Strong", image: "safari.jpeg" },
+            { id: 14, name: "Tea Rozz", tag: "Fresh Floral", notes: "Light Rose & Green Tea", image: "tea rozz.jpeg" },
+            { id: 15, name: "Versachay Pink", tag: "Women's", notes: "Fresh, Fruity & Sweet", image: "versachay pink.jpeg" },
+            { id: 16, name: "Cherry", tag: "Fresh", notes: "Light & Refreshing", image: "cherry.jpeg" },
+            { id: 17, name: "Open", tag: "Luxury", notes: "Rich, Bold & Long-lasting", image: "open.jpeg" }
+        ];
 
         let cart = [];
+        let currentSelectedProduct = null;
 
         function renderProducts() {
+            const luxuryGrid = document.getElementById('luxury-grid');
+            luxuryGrid.innerHTML = '';
+            luxuryProducts.forEach(p => {
+                luxuryGrid.innerHTML += `
+                    <div class="product-card">
+                        <div class="product-img-wrapper">
+                            <span class="tag-badge" style="background: var(--accent-gold); color: #000;">${p.tag}</span>
+                            <img src="${p.image}" alt="${p.name}" class="product-img">
+                        </div>
+                        <div class="product-details">
+                            <div>
+                                <h3 class="product-title">${p.name}</h3>
+                                <p class="product-notes">${p.notes}</p>
+                            </div>
+                            <div>
+                                <div class="card-actions">
+                                    <button class="btn-add-cart" onclick="openOptionsModal('luxury', ${p.id})">Add to Bag</button>
+                                    <button class="btn-buy-instant" onclick="openOptionsModal('luxury', ${p.id})">Order Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            
+            const giftboxGrid = document.getElementById('giftbox-grid');
+            giftboxGrid.innerHTML = '';
+            giftBoxProducts.forEach(p => {
+                giftboxGrid.innerHTML += `
+                    <div class="product-card">
+                        <div class="product-img-wrapper">
+                            <span class="tag-badge">${p.tag}</span>
+                            <img src="${p.image}" alt="${p.name}" class="product-img">
+                        </div>
+                        <div class="product-details">
+                            <div>
+                                <h3 class="product-title">${p.name}</h3>
+                                <div class="product-price">PKR ${p.price}</div>
+                                <p class="product-notes">${p.notes}</p>
+                            </div>
+                            <div>
+                                <div class="card-actions">
+                                    <button class="btn-add-cart" onclick="addGiftBoxToCart(${p.id})">Add to Bag</button>
+                                    <button class="btn-buy-instant" onclick="buyGiftBoxInstant(${p.id})">Order Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            
             const grid = document.getElementById('products-grid');
             grid.innerHTML = '';
-
             products.forEach(p => {
                 grid.innerHTML += `
                     <div class="product-card">
@@ -431,8 +576,8 @@ const products = [
                             </div>
                             <div>
                                 <div class="card-actions">
-                                    <button class="btn-add-cart" onclick="addToCart(${p.id})">Add to Cart</button>
-                                    <button class="btn-buy-instant" onclick="buySingleProduct(${p.id})">Order Now</button>
+                                    <button class="btn-add-cart" onclick="openOptionsModal('regular', ${p.id})">Add to Bag</button>
+                                    <button class="btn-buy-instant" onclick="openOptionsModal('regular', ${p.id})">Order Now</button>
                                 </div>
                             </div>
                         </div>
@@ -441,40 +586,133 @@ const products = [
             });
         }
 
-        function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            const existIndex = cart.findIndex(item => item.id === id);
+        function openOptionsModal(category, id) {
+            let productList = (category === 'luxury') ? luxuryProducts : products;
+            currentSelectedProduct = productList.find(p => p.id === id);
+            if (!currentSelectedProduct) return;
+
+            document.getElementById('modal-product-name').innerText = currentSelectedProduct.name;
+            document.getElementById('modal-product-desc').innerText = currentSelectedProduct.notes;
+            document.getElementById('modal-product-img').src = currentSelectedProduct.image;
+
+            const selectEl = document.getElementById('modal-variant-select');
+            selectEl.innerHTML = '';
+            bottleOptions.forEach((b, index) => {
+                selectEl.innerHTML += `<option value="${index}">${b.name} - PKR ${b.price}</option>`;
+            });
+
+            updateModalPrice();
+            document.getElementById('options-modal').classList.add('active');
+        }
+
+        function updateModalPrice() {
+            const selectEl = document.getElementById('modal-variant-select');
+            const selectedIndex = selectEl.value;
+            if (selectedIndex !== "") {
+                const bottle = bottleOptions[selectedIndex];
+                document.getElementById('modal-variant-price').innerText = `PKR ${bottle.price}`;
+            }
+        }
+
+        function closeOptionsModal() {
+            document.getElementById('options-modal').classList.remove('active');
+            currentSelectedProduct = null;
+        }
+
+        function addModalToCart() {
+            if (!currentSelectedProduct) return;
+            const selectEl = document.getElementById('modal-variant-select');
+            const bottleIndex = selectEl.value;
+            const bottle = bottleOptions[bottleIndex];
+
+            const cartItemId = `${currentSelectedProduct.id}-${bottle.name}`;
+            const existIndex = cart.findIndex(item => item.cartItemId === cartItemId);
 
             if (existIndex > -1) {
                 cart[existIndex].qty += 1;
             } else {
-                cart.push({ ...product, qty: 1 });
+                cart.push({
+                    cartItemId: cartItemId,
+                    name: `${currentSelectedProduct.name} (${bottle.name})`,
+                    image: currentSelectedProduct.image,
+                    price: bottle.price,
+                    qty: 1
+                });
+            }
+
+            closeOptionsModal();
+            updateCartUI();
+            toggleCart(true);
+        }
+
+        function buyModalInstant() {
+            if (!currentSelectedProduct) return;
+            const selectEl = document.getElementById('modal-variant-select');
+            const bottleIndex = selectEl.value;
+            const bottle = bottleOptions[bottleIndex];
+
+            const cartItemId = `${currentSelectedProduct.id}-${bottle.name}`;
+            cart = [{
+                cartItemId: cartItemId,
+                name: `${currentSelectedProduct.name} (${bottle.name})`,
+                image: currentSelectedProduct.image,
+                price: bottle.price,
+                qty: 1
+            }];
+
+            closeOptionsModal();
+            updateCartUI();
+            openCheckoutModal();
+        }
+
+        function addGiftBoxToCart(id) {
+            const product = giftBoxProducts.find(p => p.id === id);
+            const cartItemId = `gift-${product.id}`;
+            const existIndex = cart.findIndex(item => item.cartItemId === cartItemId);
+
+            if (existIndex > -1) {
+                cart[existIndex].qty += 1;
+            } else {
+                cart.push({
+                    cartItemId: cartItemId,
+                    name: product.name,
+                    image: product.image,
+                    price: product.price,
+                    qty: 1
+                });
             }
 
             updateCartUI();
             toggleCart(true);
         }
 
-        function buySingleProduct(id) {
+        function buyGiftBoxInstant(id) {
             cart = [];
-            const product = products.find(p => p.id === id);
-            cart.push({ ...product, qty: 1 });
+            const product = giftBoxProducts.find(p => p.id === id);
+            const cartItemId = `gift-${product.id}`;
+            cart.push({
+                cartItemId: cartItemId,
+                name: product.name,
+                image: product.image,
+                price: product.price,
+                qty: 1
+            });
             updateCartUI();
             openCheckoutModal();
         }
 
-        function removeFromCart(id) {
-            cart = cart.filter(item => item.id !== id);
+        function removeFromCart(cartItemId) {
+            cart = cart.filter(item => item.cartItemId !== cartItemId);
             updateCartUI();
         }
 
         function updateCartUI() {
             const cartCountEl = document.getElementById('cart-count');
             const cartBodyEl = document.getElementById('cart-body');
-            const cartTotalItemsEl = document.getElementById('cart-total-items');
+            const cartTotalAmountEl = document.getElementById('cart-total-amount');
 
             let totalQty = 0;
-
+            let totalPrice = 0;
             cartBodyEl.innerHTML = '';
 
             if(cart.length === 0) {
@@ -482,13 +720,14 @@ const products = [
             } else {
                 cart.forEach(item => {
                     totalQty += item.qty;
-
+                    totalPrice += item.price * item.qty;
                     cartBodyEl.innerHTML += `
                         <div class="cart-item">
                             <img src="${item.image}" alt="${item.name}">
                             <div class="cart-item-info">
-                                <div class="cart-item-title">${item.name} (Qty: ${item.qty})</div>
-                                <span class="remove-item" onclick="removeFromCart(${item.id})">Remove</span>
+                                <div class="cart-item-title">${item.name}</div>
+                                <div class="cart-item-price">PKR ${item.price} × ${item.qty}</div>
+                                <span class="remove-item" onclick="removeFromCart('${item.cartItemId}')">Remove</span>
                             </div>
                         </div>
                     `;
@@ -496,13 +735,13 @@ const products = [
             }
 
             cartCountEl.innerText = totalQty;
-            cartTotalItemsEl.innerText = totalQty;
+            cartTotalAmountEl.innerText = `PKR ${totalPrice}`;
         }
 
         function toggleCart(forceOpen = false) {
             const drawer = document.getElementById('cart-drawer');
             const overlay = document.getElementById('cart-overlay');
-            
+
             if (forceOpen || !drawer.classList.contains('active')) {
                 drawer.classList.add('active');
                 overlay.classList.add('active');
@@ -514,7 +753,7 @@ const products = [
 
         function openCheckoutModal() {
             if (cart.length === 0) {
-                alert("Please add at least one perfume to your bag.");
+                alert("Please add at least one item to your bag.");
                 return;
             }
             if(document.getElementById('cart-drawer').classList.contains('active')) {
@@ -534,11 +773,15 @@ const products = [
             const phone = document.getElementById('cust-phone').value;
             const city = document.getElementById('cust-city').value;
             const address = document.getElementById('cust-address').value;
+            const selectedWhatsApp = document.getElementById('whatsapp-choice').value;
 
             let itemsSummary = "";
+            let grandTotal = 0;
 
             cart.forEach((item, index) => {
-                itemsSummary += `${index + 1}. *${item.name}* (Qty: ${item.qty})\n`;
+                const itemSubtotal = item.price * item.qty;
+                grandTotal += itemSubtotal;
+                itemsSummary += `${index + 1}. *${item.name}* (Qty: ${item.qty}) - PKR ${itemSubtotal}\n`;
             });
 
             const waMessage = 
@@ -546,6 +789,7 @@ const products = [
 
 🛍️ *ORDERED ITEMS:*
 ${itemsSummary}
+💰 *Total Price:* *PKR ${grandTotal}*
 💳 *PAYMENT METHOD:* Cash on Delivery (COD)
 
 ----------------------------------
@@ -556,9 +800,9 @@ ${itemsSummary}
 🏙️ *City:* ${city}
 🏠 *Complete Address:* ${address}
 
-Please confirm my order and share the total amount with delivery!`;
+Please confirm my order!`;
 
-            const encodedURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`;
+            const encodedURL = `https://wa.me/${selectedWhatsApp}?text=${encodeURIComponent(waMessage)}`;
             window.open(encodedURL, '_blank');
             closeCheckoutModal();
         }
