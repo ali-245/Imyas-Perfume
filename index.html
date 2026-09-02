@@ -1,1000 +1,1276 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imyas Perfumes | Best Luxury Fragrances & Perfumes in Pakistan</title>
-    <meta name="google-site-verification" content="WRoWL4rTtDEvg8dgilh5OXHTF4AZCs_AYTl2DlYWCXw" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imyas Perfumes | Best Luxury Fragrances & Perfumes in Pakistan</title>
+<meta name="google-site-verification" content="WROWL4rTtDEvg8dgilh50XHTF4AZCS_AYTI2DIYWCXw" />
+<meta name="description" content="Shop luxury perfumes, long-lasting fragrances, and premium attars at Imyas Perfumes. Order online with Cash on Delivery across Pakistan.">
+<meta name="keywords" content="Imyas Perfumes, perfumes in Pakistan, best fragrances Lahore, buy attar online">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+:root {
+  --bg-primary: #f8f9fa;
+  --bg-card: #ffffff;
+  --bg-accent: #f1f3f5;
+  --accent-gold: #c5a059;
+  --accent-gold-dark: #a37f3e;
+  --accent-gold-glow: rgba(197, 160, 89, 0.25);
+  --text-main: #111827;
+  --text-muted: #4b5563;
+  --border-color: #e5e7eb;
+  --whatsapp-green: #25d366;
+  --whatsapp-green-dark: #1da851;
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+}
 
-    <meta name="description" content="Shop luxury perfumes, long-lasting fragrances, and premium attars at Imyas Perfumes. Order online with Cash on Delivery across Pakistan.">
-    <meta name="keywords" content="Imyas Perfumes, perfumes in Pakistan, best fragrances Lahore, buy attar online">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
 
-    <style>
-        :root {
-            --bg-primary: #08090c;
-            --bg-card: #11131c;
-            --bg-accent: #191c2b;
-            --accent-gold: #c5a059;
-            --accent-gold-glow: rgba(197, 160, 89, 0.35);
-            --text-main: #f3f4f6;
-            --text-muted: #a1a1aa;
-            --border-color: #272a3e;
-            --whatsapp-green: #25d366;
-            --font-heading: 'Cinzel', serif;
-            --font-body: 'Plus Jakarta Sans', sans-serif;
-        }
+.gold-text {
+  background: linear-gradient(135deg, #a37f3e 0%, var(--accent-gold) 60%, #8c6827 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg-primary); color: var(--text-main); font-family: var(--font-body); overflow-x: hidden; line-height: 1.5; }
+.announcement {
+  background: var(--text-main);
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 15px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
 
-        .gold-text {
-            background: linear-gradient(135deg, #fff 0%, var(--accent-gold) 60%, #e0b86c 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
 
-        .announcement {
-            background: linear-gradient(90deg, #604a22, var(--accent-gold), #604a22);
-            color: #000;
-            text-align: center;
-            padding: 8px 15px;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+}
 
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(8, 9, 12, 0.9);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-color);
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 20px;
-        }
-        .brand-logo {
-            font-family: var(--font-heading);
-            font-size: 26px;
-            font-weight: 900;
-            color: var(--accent-gold);
-            text-decoration: none;
-            letter-spacing: 3px;
-            text-shadow: 0 0 15px var(--accent-gold-glow);
-        }
-        .cart-icon-btn {
-            background: var(--bg-accent);
-            border: 1px solid var(--border-color);
-            color: var(--accent-gold);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            position: relative;
-            transition: 0.3s;
-        }
-        .cart-icon-btn:hover {
-            border-color: var(--accent-gold);
-            box-shadow: 0 0 15px var(--accent-gold-glow);
-            transform: scale(1.05);
-        }
-        .cart-count {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            background: var(--accent-gold);
-            color: #000;
-            font-size: 11px;
-            font-weight: 800;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.brand-logo {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--accent-gold-dark);
+  text-decoration: none;
+  letter-spacing: 3px;
+}
 
-        .hero {
-            position: relative;
-            padding: 110px 20px 90px;
-            text-align: center;
-            background: radial-gradient(circle at 50% 20%, #1a1d2e 0%, var(--bg-primary) 70%);
-            border-bottom: 1px solid var(--border-color);
-        }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 18px;
-            background: rgba(197, 160, 89, 0.08);
-            border: 1px solid var(--accent-gold);
-            color: var(--accent-gold);
-            border-radius: 30px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-        }
-        .hero h1 {
-            font-family: var(--font-heading);
-            font-size: 52px;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-        .hero p {
-            color: var(--text-muted);
-            font-size: 18px;
-            max-width: 620px;
-            margin: 0 auto 35px;
-        }
+.cart-icon-btn {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
 
-        .features-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .feature-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 22px;
-            border-radius: 12px;
-            text-align: center;
-            transition: 0.3s;
-        }
-        .feature-item:hover { border-color: var(--accent-gold); }
-        .feature-item i { font-size: 28px; color: var(--accent-gold); margin-bottom: 10px; }
-        .feature-item h4 { font-size: 15px; color: #fff; margin-bottom: 4px; }
-        .feature-item p { font-size: 12px; color: var(--text-muted); }
+.cart-icon-btn:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold-dark);
+  box-shadow: 0 0 15px var(--accent-gold-glow);
+  transform: scale(1.05);
+}
 
-        .catalog { max-width: 1200px; margin: 70px auto; padding: 0 20px; }
-        .section-header { text-align: center; margin-bottom: 45px; }
-        .section-header h2 { font-family: var(--font-heading); font-size: 36px; margin-bottom: 10px; }
+.cart-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--accent-gold-dark);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 30px; }
+.hero {
+  position: relative;
+  padding: 90px 20px 70px;
+  text-align: center;
+  background: linear-gradient(180deg, #ffffff 0%, var(--bg-primary) 100%);
+  border-bottom: 1px solid var(--border-color);
+}
 
-        .product-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .product-card:hover {
-            border-color: var(--accent-gold);
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-        }
-        .product-img-wrapper { position: relative; width: 100%; height: 300px; overflow: hidden; background: #161923; display: flex; align-items: center; justify-content: center; }
-        .product-img { width: 100%; height: 100%; object-fit: contain; transition: 0.6s; }
-        .product-card:hover .product-img { transform: scale(1.08); }
-        .tag-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(8, 9, 12, 0.85);
-            backdrop-filter: blur(8px);
-            color: var(--accent-gold);
-            font-size: 11px;
-            font-weight: 800;
-            padding: 5px 12px;
-            border-radius: 6px;
-            border: 1px solid var(--accent-gold);
-            text-transform: uppercase;
-            z-index: 10;
-        }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  background: rgba(197, 160, 89, 0.1);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold-dark);
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+}
 
-        .product-details { padding: 22px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .product-title { font-family: var(--font-heading); font-size: 22px; color: #fff; margin-bottom: 4px; }
-        .product-price { font-size: 14px; font-weight: 700; color: var(--accent-gold); margin-bottom: 8px; }
-        .product-notes { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.5; }
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: 48px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
 
-        .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .btn-add-cart {
-            background: var(--bg-accent);
-            border: 1px solid var(--border-color);
-            color: #fff;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.3s;
-            text-align: center;
-        }
-        .btn-add-cart:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
-        .btn-buy-instant {
-            background: var(--accent-gold);
-            color: #000;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: 800;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.3s;
-            text-align: center;
-        }
-        .btn-buy-instant:hover { background: #e0b86c; }
+.hero p {
+  color: var(--text-muted);
+  font-size: 18px;
+  max-width: 620px;
+  margin: 0 auto 35px;
+}
 
-        .cart-drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 2000; opacity: 0; pointer-events: none; transition: 0.3s; }
-        .cart-drawer-overlay.active { opacity: 1; pointer-events: all; }
-        .cart-drawer { position: fixed; top: 0; right: -420px; width: 100%; max-width: 420px; height: 100%; background: var(--bg-card); border-left: 1px solid var(--border-color); z-index: 2001; transition: 0.3s ease-in-out; display: flex; flex-direction: column; }
-        .cart-drawer.active { right: 0; }
+.features-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
 
-        .cart-header { padding: 22px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
-        .cart-header h3 { font-family: var(--font-heading); color: var(--accent-gold); }
-        .close-cart { background: none; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer; }
+.feature-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 22px;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
 
-        .cart-body { padding: 22px; flex-grow: 1; overflow-y: auto; }
-        .cart-item { display: flex; gap: 15px; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border-color); }
-        .cart-item img { width: 65px; height: 65px; object-fit: cover; border-radius: 8px; background: #161923; }
-        .cart-item-info { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
-        .cart-item-title { font-size: 15px; font-weight: 700; color: #fff; }
-        .cart-item-price { font-size: 13px; color: var(--accent-gold); font-weight: 700; }
-        .remove-item { color: #ef4444; font-size: 12px; cursor: pointer; margin-top: 4px; display: inline-block; }
+.feature-item:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-3px);
+}
 
-        .cart-footer { padding: 22px; border-top: 1px solid var(--border-color); }
-        .cart-summary-line { display: flex; justify-content: space-between; font-size: 14px; color: var(--text-muted); margin-bottom: 6px; }
-        .cart-total { display: flex; justify-content: space-between; font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 15px; border-top: 1px dashed var(--border-color); padding-top: 10px; }
+.feature-item i {
+  font-size: 28px;
+  color: var(--accent-gold-dark);
+  margin-bottom: 10px;
+}
 
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 3000; display: none; align-items: center; justify-content: center; padding: 15px; }
-        .modal-overlay.active { display: flex; }
-        .modal-content { background: var(--bg-card); border: 1px solid var(--accent-gold); border-radius: 16px; width: 100%; max-width: 500px; padding: 20px; position: relative; box-shadow: 0 0 30px var(--accent-gold-glow); max-height: 92vh; overflow-y: auto; }
-        .modal-title { font-family: var(--font-heading); font-size: 20px; color: var(--accent-gold); margin-bottom: 2px; text-align: center; }
-        .modal-subtitle { font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 12px; }
+.feature-item h4 {
+  font-size: 15px;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
 
-        .modal-product-img { width: 100%; height: 180px; object-fit: contain; background: #161923; border-radius: 10px; margin-bottom: 12px; }
+.feature-item p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
 
-        .form-group { margin-bottom: 8px; }
-        .form-group label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-gold); font-weight: 700; margin-bottom: 3px; }
-        .form-control { width: 100%; background: var(--bg-primary); border: 1px solid var(--border-color); padding: 8px 12px; border-radius: 8px; color: #fff; font-size: 13px; outline: none; transition: 0.3s; }
-        .form-control:focus { border-color: var(--accent-gold); }
+.catalog {
+  max-width: 1200px;
+  margin: 70px auto;
+  padding: 0 20px;
+}
 
-        .google-search-container { position: relative; width: 100%; margin-bottom: 4px; }
-        .search-input-group { display: flex; gap: 8px; }
-        
-        .autocomplete-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: var(--bg-card);
-            border: 1px solid var(--accent-gold);
-            border-top: none;
-            border-radius: 0 0 8px 8px;
-            max-height: 160px;
-            overflow-y: auto;
-            z-index: 9999;
-            display: none;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
-        }
-        .autocomplete-item {
-            padding: 8px 12px;
-            font-size: 12px;
-            color: #fff;
-            cursor: pointer;
-            border-bottom: 1px solid var(--border-color);
-            transition: 0.2s;
-        }
-        .autocomplete-item:hover {
-            background: var(--bg-accent);
-            color: var(--accent-gold);
-            padding-left: 15px;
-        }
+.section-header {
+  text-align: center;
+  margin-bottom: 45px;
+}
 
-        #map { width: 100%; height: 140px; border-radius: 8px; margin-top: 4px; border: 1px solid var(--border-color); }
+.section-header h2 {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  margin-bottom: 10px;
+}
 
-        .btn-submit-order {
-            width: 100%;
-            background: var(--whatsapp-green);
-            color: #fff;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 800;
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-        .btn-submit-order:hover { background: #1ebe5d; transform: translateY(-2px); }
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 30px;
+}
 
-        footer { background: #040507; border-top: 1px solid var(--border-color); padding: 40px 20px; text-align: center; color: var(--text-muted); font-size: 14px; }
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
 
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 36px; }
-            .card-actions { grid-template-columns: 1fr; }
-        }
-    </style>
+.product-card:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+}
+
+.product-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: 0.5s;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+}
+
+.tag-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #ffffff;
+  color: var(--accent-gold-dark);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--accent-gold);
+  text-transform: uppercase;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.product-details {
+  padding: 22px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.product-price {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--accent-gold-dark);
+  margin-bottom: 8px;
+}
+
+.product-notes {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-add-cart {
+  background: #ffffff;
+  border: 1px solid var(--text-main);
+  color: var(--text-main);
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.btn-add-cart:hover {
+  background: var(--text-main);
+  color: #ffffff;
+}
+
+.btn-buy-instant {
+  background: var(--accent-gold-dark);
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.btn-buy-instant:hover {
+  background: var(--accent-gold);
+}
+
+.cart-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.cart-drawer-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  background: #ffffff;
+  border-left: 1px solid var(--border-color);
+  z-index: 2001;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.cart-drawer.active {
+  right: 0;
+}
+
+.cart-header {
+  padding: 22px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-header h3 {
+  font-family: var(--font-heading);
+  color: var(--text-main);
+}
+
+.close-cart {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.cart-body {
+  padding: 22px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.cart-item {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cart-item img {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.cart-item-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cart-item-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.cart-item-price {
+  font-size: 13px;
+  color: var(--accent-gold-dark);
+  font-weight: 700;
+}
+
+.remove-item {
+  color: #dc3545;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+.cart-footer {
+  padding: 22px;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-primary);
+}
+
+.cart-summary-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 15px;
+  border-top: 1px dashed var(--border-color);
+  padding-top: 10px;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-content {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  padding: 25px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.modal-title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: var(--text-main);
+  margin-bottom: 2px;
+  text-align: center;
+}
+
+.modal-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.modal-product-img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  background: #f8f9fa;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-main);
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: var(--text-main);
+  font-size: 13px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.form-control:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px var(--accent-gold-glow);
+}
+
+.google-search-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.search-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  max-height: 160px;
+  overflow-y: auto;
+  z-index: 9999;
+  display: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.autocomplete-item {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text-main);
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+  transition: 0.2s;
+}
+
+.autocomplete-item:hover {
+  background: var(--bg-primary);
+  color: var(--accent-gold-dark);
+}
+
+#map {
+  width: 100%;
+  height: 140px;
+  border-radius: 8px;
+  margin-top: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.btn-submit-order {
+  width: 100%;
+  background: var(--whatsapp-green);
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.3s;
+  margin-top: 12px;
+}
+
+.btn-submit-order:hover {
+  background: var(--whatsapp-green-dark);
+  transform: translateY(-2px);
+}
+
+footer {
+  background: #ffffff;
+  border-top: 1px solid var(--border-color);
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 34px; }
+  .card-actions { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
+<div class="announcement">
+FREE DELIVERY IN LAHORE ON ORDERS OVER PKR 1,000 | AUTO-CALCULATED RS. 20/KM DELIVERY FOR ORDERS UNDER 1,000 | CASH ON DELIVERY
+</div>
+<header>
+<div class="nav-container">
+<a href="#" class="brand-logo">IMYAS PERFUMES</a>
+<div class="cart-icon-btn" onclick="toggleCart()">
+<i class="fa-solid fa-bag-shopping"></i>
+<span class="cart-count" id="cart-count">0</span>
+</div>
+</div>
+</header>
+<section class="hero">
+<span class="hero-badge"><i class="fa-solid fa-gem"></i> Premium Concentrated Fragrances</span>
+<h1 class="gold-text">Unveil Your Signature Scent</h1>
+<p>Long-lasting luxury perfumes crafted for elegance, confidence, and distinction.</p>
+</section>
+<div class="features-bar">
+<div class="feature-item">
+<i class="fa-solid fa-truck-fast"></i>
+<h4>Fast Courier Express</h4>
+<p>Leopard & Trax (2-4 Days)</p>
+</div>
+<div class="feature-item">
+<i class="fa-solid fa-hand-holding-dollar"></i>
+<h4>Cash On Delivery</h4>
+<p>Pay when parcel arrives</p>
+</div>
+</div>
+<section class="catalog">
+<div class="section-header">
+<span class="hero-badge" style="margin-bottom: 12px;"><i class="fa-solid fa-crown"></i> Elite Picks</span>
+<h2 class="gold-text">Supreme & Signature Luxury</h2>
+<p style="color: var(--text-muted);">Our finest, most exclusive high-end perfumes and rich concentrates</p>
+</div>
+<div class="products-grid" id="luxury-grid"></div>
+</section>
+<section class="catalog" style="margin-top: 20px;">
+<div class="section-header">
+<span class="hero-badge" style="margin-bottom: 12px;"><i class="fa-solid fa-gift"></i> Gift Boxes & Specials</span>
+<h2 class="gold-text">Exclusive Gift Box Collection</h2>
+<p style="color: var(--text-muted);">Premium packaged gift sets and elite signature editions PKR 350</p>
+</div>
+<div class="products-grid" id="giftbox-grid"></div>
+</section>
+<section class="catalog" style="margin-top: 20px;">
+<div class="section-header">
+<span class="hero-badge" style="margin-bottom: 12px;"><i class="fa-solid fa-bottle-droplet"></i> Scent Inventory</span>
+<h2 class="gold-text">Exclusive Fragrance Collection</h2>
+<p style="color: var(--text-muted);">Explore our diverse scent inventory</p>
+</div>
+<div class="products-grid" id="products-grid"></div>
+</section>
+<div class="cart-drawer-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cart-drawer">
+<div class="cart-header">
+<h3>Shopping Bag</h3>
+<button class="close-cart" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
+</div>
+<div class="cart-body" id="cart-body"></div>
+<div class="cart-footer">
+<div class="cart-summary-line">
+<span>Subtotal:</span>
+<span id="cart-subtotal-amount">PKR 0</span>
+</div>
+<div class="cart-summary-line" id="delivery-row">
+<span>Delivery Charges:</span>
+<span id="delivery-display" style="color: var(--accent-gold-dark); font-weight: 700;">Free (Order 1000+)</span>
+</div>
+<div class="cart-total">
+<span>Total Amount: </span>
+<span id="cart-total-amount">PKR 0</span>
+</div>
+<button class="btn-buy-instant" style="width: 100%; font-size: 15px;" onclick="openCheckoutModal()">Proceed to Order</button>
+</div>
+</div>
+<div class="modal-overlay" id="options-modal">
+<div class="modal-content">
+<h3 class="modal-title" id="modal-product-name">Select Bottle Option</h3>
+<p class="modal-subtitle" id="modal-product-desc">Choose your bottle size and quality grade</p>
+<img id="modal-product-img" src="" alt="" class="modal-product-img" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;100&quot; height=&quot;100&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;%23c5a059&quot; stroke-width=&quot;1.5&quot;><path d=&quot;M6 2h12v6H6z&quot;/><path d=&quot;M9 8v2a3 3 0 0 0 3 3 3 3 0 0 0 3-3V8&quot;/><path d=&quot;M10 13v7h4v-7&quot;/></svg>';">
+<div class="form-group">
+<label>Select Bottle Type & Grade</label>
+<select id="modal-variant-select" class="form-control" onchange="updateModalPrice()"></select>
+</div>
+<div class="form-group">
+<label>Price</label>
+<div id="modal-variant-price" style="font-size: 16px; font-weight: 800; color: var(--accent-gold-dark); padding: 3px 0;">PKR 0</div>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+<button type="button" class="btn-add-cart" onclick="addModalToCart()">Add to Bag</button>
+<button type="button" class="btn-buy-instant" onclick="buyModalInstant()">Order Now</button>
+</div>
+<button type="button" onclick="closeOptionsModal()" style="width: 100%; background: none; border: none; color: var(--text-muted); margin-top: 12px; cursor: pointer; font-size: 12px;">Cancel</button>
+</div>
+</div>
+<div class="modal-overlay" id="checkout-modal">
+<div class="modal-content">
+<h3 class="modal-title">Shipping & Order Details</h3>
+<p class="modal-subtitle">Review your details and send your order!</p>
+<form id="checkout-form" onsubmit="submitOrder(event)">
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" id="cust-name" class="form-control" placeholder="e.g. Muhammad Ali" required>
+</div>
+<div class="form-group">
+<label>WhatsApp / Phone Number</label>
+<input type="tel" id="cust-phone" class="form-control" placeholder="e.g. 0300 1234567" required>
+</div>
+<div style="border-top: 1px dashed var(--border-color); padding-top: 12px; margin-top: 12px;">
+<label style="color: var(--accent-gold-dark); font-size: 11px; font-weight: 800; display: block; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">
+<i class="fa-solid fa-location-dot"></i> Shipping & Delivery Address
+</label>
+<div class="form-group">
+<label>City</label>
+<input type="text" id="cust-city" class="form-control" value="Lahore" required>
+</div>
+<div class="form-group">
+<label>Complete Delivery Address / Landmark</label>
+<textarea id="cust-address" class="form-control" rows="2" placeholder="House #, Street #, Area..." required></textarea>
+</div>
+</div>
+<div style="border-top: 1px dashed var(--border-color); padding-top: 12px; margin-top: 12px;">
+<label style="color: var(--accent-gold-dark); font-size: 11px; font-weight: 800; display: block; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">
+<i class="fa-solid fa-map-location-dot"></i> Customer Delivery Details
+</label>
+<div class="form-group">
+<label>Google-Style Area Search</label>
+<div class="google-search-container">
+<div class="search-input-group">
+<input type="text" id="area-search-input" class="form-control" placeholder="Type area (e.g. Ghaziabad, Tajpura, Gulberg...)" autocomplete="off" oninput="handleGoogleSearchInput()">
+</div>
+<div id="autocomplete-list" class="autocomplete-dropdown"></div>
+</div>
+<div id="map"></div>
+<small style="color: var(--accent-gold-dark); display: block; margin-top: 6px; font-size: 12px; font-weight: 700;" id="distance-info">Distance from Shop: Calculating...</small>
+</div>
+</div>
+<div class="form-group" style="margin-top: 10px;">
+<label>Select WhatsApp Number to Send Order</label>
+<select id="whatsapp-choice" class="form-control" required>
+<option value="923004315273">WhatsApp 1: +92 300 4315273</option>
+<option value="923260539381">WhatsApp 2: +92 326 0539381</option>
+</select>
+</div>
+<button type="submit" class="btn-submit-order">
+<i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> Send Order via WhatsApp
+</button>
+<button type="button" onclick="closeCheckoutModal()" style="width: 100%; background: none; border: none; color: var(--text-muted); margin-top: 12px; cursor: pointer; font-size: 12px;">Cancel</button>
+</form>
+</div>
+</div>
+<footer>
+<p>&copy; 2026 <strong style="color: var(--accent-gold-dark);">Imyas Perfumes</strong>. All Rights Reserved.</p>
+<p style="font-size: 12px; margin-top: 5px;">Support WhatsApp: +92 300 4315273 | Sales WhatsApp: +92 326 0539381</p>
+</footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const shopLat = 31.5575;
+const shopLng = 74.3980;
+let map = null;
+let customerMarker = null;
+let calculatedDistanceKm = 2.0;
+let calculatedDeliveryFee = 40;
 
-    <div class="announcement">
-        🚀 FREE DELIVERY IN LAHORE ON ORDERS OVER PKR 1,000 | AUTO-CALCULATED RS. 20/KM DELIVERY FOR ORDERS UNDER 1,000 | CASH ON DELIVERY
-    </div>
+const lahoreAreas = [
+  { name: "Ghaziabad & Tajpura (Shop Location)", lat: 31.5575, lng: 74.3980 },
+  { name: "Ghaziabad", lat: 31.5569, lng: 74.3954 },
+  { name: "Tajpura", lat: 31.5618, lng: 74.4043 },
+  { name: "Mughalpura", lat: 31.5725, lng: 74.3801 },
+  { name: "Shalimar Gardens", lat: 31.5902, lng: 74.3835 },
+  { name: "Gulberg 1, 2, 3", lat: 31.5135, lng: 74.3436 },
+  { name: "DHA Lahore (General)", lat: 31.4800, lng: 74.4100 },
+  { name: "DHA Phase 1", lat: 31.4883, lng: 74.3942 },
+  { name: "DHA Phase 2", lat: 31.4796, lng: 74.4093 },
+  { name: "DHA Phase 3", lat: 31.4695, lng: 74.4231 },
+  { name: "DHA Phase 4", lat: 31.4678, lng: 74.3995 },
+  { name: "DHA Phase 5", lat: 31.4704, lng: 74.4485 },
+  { name: "DHA Phase 6", lat: 31.4836, lng: 74.4789 },
+  { name: "DHA Phase 7 & 8", lat: 31.4485, lng: 74.4852 },
+  { name: "Johar Town", lat: 31.4697, lng: 74.2728 },
+  { name: "Model Town", lat: 31.4914, lng: 74.3272 },
+  { name: "Lahore Cantt", lat: 31.5283, lng: 74.3922 },
+  { name: "Sadar Bazaar", lat: 31.5342, lng: 74.3451 },
+  { name: "Mall Road", lat: 31.5580, lng: 74.3297 },
+  { name: "Badshahi Mosque / Walled City", lat: 31.5880, lng: 74.3106 },
+  { name: "Old Anarkali", lat: 31.5644, lng: 74.3142 },
+  { name: "Liberty Market", lat: 31.5126, lng: 74.3406 },
+  { name: "Gulshan-e-Ravi", lat: 31.5522, lng: 74.2886 },
+  { name: "Samanabad", lat: 31.5375, lng: 74.3005 },
+  { name: "Allama Iqbal Town", lat: 31.5085, lng: 74.2842 },
+  { name: "Wapda Town", lat: 31.4428, lng: 74.2652 },
+  { name: "Bahria Town Lahore", lat: 31.3789, lng: 74.1873 },
+  { name: "Raiwind Road", lat: 31.3922, lng: 74.2405 },
+  { name: "Ferozepur Road", lat: 31.5032, lng: 74.3312 },
+  { name: "Baghbanpura", lat: 31.5815, lng: 74.3792 },
+  { name: "Garhi Shahu", lat: 31.5645, lng: 74.3533 },
+  { name: "Data Darbar", lat: 31.5772, lng: 74.3079 },
+  { name: "Garden Town", lat: 31.5002, lng: 74.3121 },
+  { name: "Faisal Town", lat: 31.4879, lng: 74.3065 },
+  { name: "Muslim Town", lat: 31.5178, lng: 74.3195 },
+  { name: "Township", lat: 31.4602, lng: 74.3120 },
+  { name: "Valencia Town", lat: 31.4289, lng: 74.2801 }
+];
 
-    <header>
-        <div class="nav-container">
-            <a href="#" class="brand-logo">IMYAS PERFUMES</a>
-            <div class="cart-icon-btn" onclick="toggleCart()">
-                <i class="fa-solid fa-bag-shopping"></i>
-                <span class="cart-count" id="cart-count">0</span>
+const bottleOptions = [
+  { name: "3 ML Bottle (Normal)", price: 200, type: "normal" },
+  { name: "3 ML Bottle (Special)", price: 350, type: "special" },
+  { name: "6 ML Bottle (Normal)", price: 350, type: "normal" },
+  { name: "6 ML Bottle (Special)", price: 600, type: "special" },
+  { name: "Tola Bottle (Normal)", price: 600, type: "normal" },
+  { name: "Tola Bottle (Special)", price: 1000, type: "special" },
+  { name: "Plastic Bottle (Normal)", price: 150, type: "normal" },
+  { name: "Plastic Bottle (Special)", price: 250, type: "special" }
+];
+
+const luxuryProducts = [
+  { id: 101, name: "Turkey Gulab", tag: "Supreme", notes: "Exquisite Rich Turkish Rose Extract", image: "turkey gulab.png" },
+  { id: 102, name: "White Oud", tag: "Supreme", notes: "Sublime Woody & Clean Oriental Scent", image: "white Aud.png" },
+  { id: 103, name: "Silver", tag: "Luxury", notes: "Crisp, Metallic & Sophisticated", image: "silver.png" },
+  { id: 104, name: "Cool Breeze", tag: "Signature", notes: "Refreshing Aquatic & Breezy Aura", image: "cool breeze.png" },
+  { id: 105, name: "Jinnan", tag: "Supreme", notes: "Deep Traditional Royal Blend", image: "janan.png" },
+  { id: 106, name: "Baka Raat Special", tag: "Elite", notes: "Intense Amber & Sweet Floral Sillage", image: "baka raat 2.png" },
+  { id: 107, name: "auud Spreme", tag: "Masterpiece", notes: "Pure Aged Concentrated Oud", image: "aud supreme.png" }
+];
+
+const giftBoxProducts = [
+  { id: 201, name: "Silver Box", tag: "Gift Set", price: 350, notes: "Exquisite Presentation & Fragrance", image: "silver box.png" },
+  { id: 202, name: "Dun Hill", tag: "Classic", price: 350, notes: "Refined & Sophisticated Gentlemanly Scent", image: "dun hill.png" },
+  { id: 203, name: "Sultan", tag: "Royal", price: 350, notes: "Majestic Oriental Blend", image: "sultan.png" },
+  { id: 204, name: "Blue Oud", tag: "Exclusive", price: 350, notes: "Deep Aquatic Notes with Rich Oud", image: "blue aud.png" },
+  { id: 205, name: "D Loves Attar", tag: "Special Edition", price: 350, notes: "Romance & Deep Sensual Notes", image: "D loves attar.png" },
+  { id: 206, name: "Ateeq", tag: "Heritage", price: 350, notes: "Traditional Timeless Arabian Attar", image: "ateeq.png" },
+  { id: 207, name: "Black Boss", tag: "Power", price: 350, notes: "Bold, Intense & Dominant", image: "black boss.png" },
+  { id: 208, name: "Galaf E Kabha Box", tag: "Collector's Box", price: 350, notes: "Sacred & Pure Luxurious Essence", image: "galaf e kabha box.png" }
+];
+
+const products = [
+  { id: 1, name: "Ammer ul Aud", tag: "Premium", notes: "Rich, Woody & Elegant", image: "ameer ul Aud.png" },
+  { id: 2, name: "Assel", tag: "Classic", notes: "Traditional Bold Scent", image: "assel.png" },
+  { id: 3, name: "Baka Raat", tag: "Luxury", notes: "Sweet Floral & Woody", image: "baka raat.png" },
+  { id: 4, name: "Broot", tag: "Men's Classic", notes: "Fresh, Spicy & Aromatic", image: "broot.png" },
+  { id: 5, name: "Chocolate", tag: "Sweet", notes: "Rich Gourmand Notes", image: "Choclate.png" },
+  { id: 6, name: "Fog", tag: "Fresh", notes: "Cool & Refreshing Aqua", image: "fod.png" },
+  { id: 7, name: "Galaf Kabha", tag: "Spiritual", notes: "Pure Oud & Musk", image: "galaf kabha.png" },
+  { id: 8, name: "Gucci Rush", tag: "Designer", notes: "Fruity & Vibrant Floral", image: "gucci rush.png" },
+  { id: 9, name: "Motia", tag: "Floral", notes: "Pure Jasmine Extract", image: "motia.png" },
+  { id: 10, name: "Office Man", tag: "Everyday", notes: "Clean & Professional", image: "office man.png" },
+  { id: 11, name: "Poison", tag: "Bold", notes: "Dark & Mysterious", image: "poison.png" },
+  { id: 12, name: "Rooh Gulab", tag: "Floral", notes: "Premium Rose Extract", image: "rooh gulab.png" },
+  { id: 13, name: "Safari", tag: "Adventure", notes: "Earthy, Woody & Strong", image: "safari.png" },
+  { id: 14, name: "Tea Rozz", tag: "Fresh Floral", notes: "Light Rose & Green Tea", image: "tea rozz.png" },
+  { id: 15, name: "Versachay Pink", tag: "Women's", notes: "Fresh, Fruity & Sweet", image: "versachay pink.png" },
+  { id: 16, name: "Cherry", tag: "Fresh", notes: "Light & Refreshing", image: "cherry.png" },
+  { id: 17, name: "Open", tag: "Luxury", notes: "Rich, Bold & Long-lasting", image: "open.png" }
+];
+
+let cart = [];
+let currentSelectedProduct = null;
+let currentActiveFilteredOptions = [];
+const defaultSvgImg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23c5a059' stroke-width='1.5'><path d='M6 2h12v6H6z'/><path d='M9 8v2a3 3 0 0 0 3 3 3 3 0 0 0 3-3V8'/><path d='M10 13v7h4v-7'/></svg>";
+
+function renderProducts() {
+  const luxuryGrid = document.getElementById('luxury-grid');
+  luxuryGrid.innerHTML = '';
+  luxuryProducts.forEach(p => {
+    luxuryGrid.innerHTML += `
+      <div class="product-card">
+        <div class="product-img-wrapper">
+          <span class="tag-badge">${p.tag}</span>
+          <img src="${p.image}" alt="${p.name}" class="product-img" onerror="this.onerror=null; this.src='${defaultSvgImg}';">
+        </div>
+        <div class="product-details">
+          <div>
+            <h3 class="product-title">${p.name}</h3>
+            <p class="product-notes">${p.notes}</p>
+          </div>
+          <div>
+            <div class="card-actions">
+              <button class="btn-add-cart" onclick="openOptionsModal('luxury', ${p.id})">Add to Bag</button>
+              <button class="btn-buy-instant" onclick="openOptionsModal('luxury', ${p.id})">Order Now</button>
             </div>
+          </div>
         </div>
-    </header>
+      </div>`;
+  });
 
-    <section class="hero">
-        <span class="hero-badge"><i class="fa-solid fa-gem"></i> Premium Concentrated Fragrances</span>
-        <h1 class="gold-text">Unveil Your Signature Scent</h1>
-        <p>Long-lasting luxury perfumes crafted for elegance, confidence, and distinction.</p>
-    </section>
-
-    <div class="features-bar">
-        <div class="feature-item">
-            <i class="fa-solid fa-truck-fast"></i>
-            <h4>Fast Courier Express</h4>
-            <p>Leopard & Trax (2-4 Days)</p>
+  const giftboxGrid = document.getElementById('giftbox-grid');
+  giftboxGrid.innerHTML = '';
+  giftBoxProducts.forEach(p => {
+    giftboxGrid.innerHTML += `
+      <div class="product-card">
+        <div class="product-img-wrapper">
+          <span class="tag-badge">${p.tag}</span>
+          <img src="${p.image}" alt="${p.name}" class="product-img" onerror="this.onerror=null; this.src='${defaultSvgImg}';">
         </div>
-        <div class="feature-item">
-            <i class="fa-solid fa-hand-holding-dollar"></i>
-            <h4>Cash On Delivery</h4>
-            <p>Pay when parcel arrives</p>
-        </div>
-    </div>
-
-    <section class="catalog">
-        <div class="section-header">
-            <span class="hero-badge" style="margin-bottom: 12px;"><i class="fa-solid fa-crown"></i> Elite Picks</span>
-            <h2 class="gold-text">Supreme & Signature Luxury</h2>
-            <p style="color: var(--text-muted);">Our finest, most exclusive high-end perfumes and rich concentrates</p>
-        </div>
-        <div class="products-grid" id="luxury-grid"></div>
-    </section>
-
-    <section class="catalog" style="margin-top: 20px;">
-        <div class="section-header">
-            <span class="hero-badge" style="margin-bottom: 12px;"><i class="fa-solid fa-gift"></i> Gift Boxes & Specials</span>
-            <h2 class="gold-text">Exclusive Gift Box Collection</h2>
-            <p style="color: var(--text-muted);">Premium packaged gift sets and elite signature editions - PKR 350</p>
-        </div>
-        <div class="products-grid" id="giftbox-grid"></div>
-    </section>
-
-    <section class="catalog" style="margin-top: 20px;">
-        <div class="section-header">
-            <span class="hero-badge" style="margin-bottom: 12px;"><i class="fa-solid fa-bottle-droplet"></i> Scent Inventory</span>
-            <h2 class="gold-text">Exclusive Fragrance Collection</h2>
-            <p style="color: var(--text-muted);">Explore our diverse scent inventory</p>
-        </div>
-        <div class="products-grid" id="products-grid"></div>
-    </section>
-
-    <div class="cart-drawer-overlay" id="cart-overlay" onclick="toggleCart()"></div>
-    <div class="cart-drawer" id="cart-drawer">
-        <div class="cart-header">
-            <h3>Shopping Bag</h3>
-            <button class="close-cart" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="cart-body" id="cart-body"></div>
-        <div class="cart-footer">
-            <div class="cart-summary-line">
-                <span>Subtotal:</span>
-                <span id="cart-subtotal-amount">PKR 0</span>
+        <div class="product-details">
+          <div>
+            <h3 class="product-title">${p.name}</h3>
+            <div class="product-price">PKR ${p.price}</div>
+            <p class="product-notes">${p.notes}</p>
+          </div>
+          <div>
+            <div class="card-actions">
+              <button class="btn-add-cart" onclick="addGiftBoxToCart(${p.id})">Add to Bag</button>
+              <button class="btn-buy-instant" onclick="buyGiftBoxInstant(${p.id})">Order Now</button>
             </div>
-            <div class="cart-summary-line" id="delivery-row">
-                <span>Delivery Charges:</span>
-                <span id="delivery-display" style="color: var(--accent-gold); font-weight: 700;">Free (Order 1000+)</span>
-            </div>
-            <div class="cart-total">
-                <span>Total Amount:</span>
-                <span id="cart-total-amount">PKR 0</span>
-            </div>
-            <button class="btn-buy-instant" style="width: 100%; font-size: 15px;" onclick="openCheckoutModal()">Proceed to Order</button>
+          </div>
         </div>
-    </div>
+      </div>`;
+  });
 
-    <div class="modal-overlay" id="options-modal">
-        <div class="modal-content">
-            <h3 class="modal-title" id="modal-product-name">Select Bottle Option</h3>
-            <p class="modal-subtitle" id="modal-product-desc">Choose your bottle size and quality grade</p>
-            <img id="modal-product-img" src="" alt="" class="modal-product-img" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;100&quot; height=&quot;100&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;%23c5a059&quot; stroke-width=&quot;1.5&quot;><path d=&quot;M6 2h12v6H6z&quot;/><path d=&quot;M9 8v2a3 3 0 0 0 3 3 3 3 0 0 0 3-3V8&quot;/><path d=&quot;M10 13v7h4v-7&quot;/></svg>';">
-            
-            <div class="form-group">
-                <label>Select Bottle Type & Grade</label>
-                <select id="modal-variant-select" class="form-control" onchange="updateModalPrice()">
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Price</label>
-                <div id="modal-variant-price" style="font-size: 16px; font-weight: 800; color: var(--accent-gold); padding: 3px 0;">PKR 0</div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
-                <button type="button" class="btn-add-cart" onclick="addModalToCart()">Add to Bag</button>
-                <button type="button" class="btn-buy-instant" onclick="buyModalInstant()">Order Now</button>
-            </div>
-            <button type="button" onclick="closeOptionsModal()" style="width: 100%; background: none; border: none; color: var(--text-muted); margin-top: 8px; cursor: pointer; font-size: 12px;">Cancel</button>
+  const productsGrid = document.getElementById('products-grid');
+  productsGrid.innerHTML = '';
+  products.forEach(p => {
+    productsGrid.innerHTML += `
+      <div class="product-card">
+        <div class="product-img-wrapper">
+          <span class="tag-badge">${p.tag}</span>
+          <img src="${p.image}" alt="${p.name}" class="product-img" onerror="this.onerror=null; this.src='${defaultSvgImg}';">
         </div>
-    </div>
-
-    <div class="modal-overlay" id="checkout-modal">
-        <div class="modal-content">
-            <h3 class="modal-title">Shipping & Order Details</h3>
-            <p class="modal-subtitle">Review your details and send your order!</p>
-
-            <form id="checkout-form" onsubmit="submitOrder(event)">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" id="cust-name" class="form-control" placeholder="e.g. Muhammad Ali" required>
-                </div>
-                <div class="form-group">
-                    <label>WhatsApp / Phone Number</label>
-                    <input type="tel" id="cust-phone" class="form-control" placeholder="e.g. 0300 1234567" required>
-                </div>
-
-                <div style="border-top: 1px dashed var(--border-color); padding-top: 8px; margin-top: 8px;">
-                    <label style="color: var(--accent-gold); font-size: 11px; font-weight: 800; display: block; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">
-                        <i class="fa-solid fa-location-dot"></i> Shipping & Delivery Address
-                    </label>
-
-                    <div class="form-group">
-                        <label>City</label>
-                        <input type="text" id="cust-city" class="form-control" value="Lahore" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Complete Delivery Address / Landmark</label>
-                        <textarea id="cust-address" class="form-control" rows="2" placeholder="House #, Street #, Area..." required></textarea>
-                    </div>
-                </div>
-
-                <div style="border-top: 1px dashed var(--accent-gold); padding-top: 10px; margin-top: 10px;">
-                    <label style="color: var(--accent-gold); font-size: 12px; font-weight: 800; display: block; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.5px;">
-                        <i class="fa-solid fa-map-location-dot"></i> Customer Delivery Details
-                    </label>
-
-                    <div class="form-group">
-                        <label>🔍 Google-Style Area Search</label>
-                        <div class="google-search-container">
-                            <div class="search-input-group">
-                                <input type="text" id="area-search-input" class="form-control" placeholder="Type area (e.g. Ghaziabad, Tajpura, Gulberg...)" autocomplete="off" oninput="handleGoogleSearchInput()">
-                            </div>
-                            <div id="autocomplete-list" class="autocomplete-dropdown"></div>
-                        </div>
-                        <div id="map"></div>
-                        <small style="color: var(--accent-gold); display: block; margin-top: 4px; font-size: 12px;" id="distance-info">Distance from Shop: Calculating...</small>
-                    </div>
-                </div>
-
-                <div class="form-group" style="margin-top: 10px;">
-                    <label>Select WhatsApp Number to Send Order</label>
-                    <select id="whatsapp-choice" class="form-control" required>
-                        <option value="923004315273">WhatsApp 1: +92 300 4315273</option>
-                        <option value="923260539381">WhatsApp 2: +92 326 0539381</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn-submit-order">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> Send Order via WhatsApp
-                </button>
-                <button type="button" onclick="closeCheckoutModal()" style="width: 100%; background: none; border: none; color: var(--text-muted); margin-top: 8px; cursor: pointer; font-size: 12px;">Cancel</button>
-            </form>
+        <div class="product-details">
+          <div>
+            <h3 class="product-title">${p.name}</h3>
+            <p class="product-notes">${p.notes}</p>
+          </div>
+          <div>
+            <div class="card-actions">
+              <button class="btn-add-cart" onclick="openOptionsModal('regular', ${p.id})">Add to Bag</button>
+              <button class="btn-buy-instant" onclick="openOptionsModal('regular', ${p.id})">Order Now</button>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>`;
+  });
+}
 
-    <footer>
-        <p>&copy; 2026 <strong style="color: var(--accent-gold);">Imyas Perfumes</strong>. All Rights Reserved.</p>
-        <p style="font-size: 12px; margin-top: 5px;">Support WhatsApp: +92 300 4315273 | Sales WhatsApp: +92 326 0539381</p>
-    </footer>
+function toggleCart() {
+  document.getElementById('cart-drawer').classList.toggle('active');
+  document.getElementById('cart-overlay').classList.toggle('active');
+}
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+function openOptionsModal(type, id) {
+  let p = null;
+  if (type === 'luxury') {
+    p = luxuryProducts.find(item => item.id === id);
+    currentActiveFilteredOptions = bottleOptions.filter(opt => opt.type === 'special');
+  } else {
+    p = products.find(item => item.id === id);
+    currentActiveFilteredOptions = bottleOptions.filter(opt => opt.type === 'normal');
+  }
+  
+  currentSelectedProduct = p;
+  document.getElementById('modal-product-name').innerText = p.name;
+  document.getElementById('modal-product-desc').innerText = p.notes;
+  
+  const modalImg = document.getElementById('modal-product-img');
+  modalImg.src = p.image;
+  modalImg.onerror = function() { this.src = defaultSvgImg; };
+  
+  const select = document.getElementById('modal-variant-select');
+  select.innerHTML = '';
+  currentActiveFilteredOptions.forEach((opt, idx) => {
+    select.innerHTML += `<option value="${idx}">${opt.name} PKR ${opt.price}</option>`;
+  });
+  
+  updateModalPrice();
+  document.getElementById('options-modal').classList.add('active');
+}
 
-    <script>
-        const shopLat = 31.5575;
-        const shopLng = 74.3980;
+function updateModalPrice() {
+  const idx = document.getElementById('modal-variant-select').value;
+  const opt = currentActiveFilteredOptions[idx];
+  if (opt) {
+    document.getElementById('modal-variant-price').innerText = `PKR ${opt.price}`;
+  }
+}
 
-        let map = null;
-        let customerMarker = null;
-        let calculatedDistanceKm = 2.0;
-        let calculatedDeliveryFee = 40;
+function closeOptionsModal() {
+  document.getElementById('options-modal').classList.remove('active');
+}
 
-        const lahoreAreas = [
-            { name: "Ghaziabad & Tajpura (Shop Location)", lat: 31.5575, lng: 74.3980 },
-            { name: "Ghaziabad", lat: 31.5569, lng: 74.3954 },
-            { name: "Tajpura", lat: 31.5618, lng: 74.4043 },
-            { name: "Mughalpura", lat: 31.5725, lng: 74.3801 },
-            { name: "Shalimar Gardens", lat: 31.5902, lng: 74.3835 },
-            { name: "Gulberg 1, 2, 3", lat: 31.5135, lng: 74.3436 },
-            { name: "DHA Lahore (General)", lat: 31.4800, lng: 74.4100 },
-            { name: "DHA Phase 1", lat: 31.4883, lng: 74.3942 },
-            { name: "DHA Phase 2", lat: 31.4796, lng: 74.4093 },
-            { name: "DHA Phase 3", lat: 31.4695, lng: 74.4231 },
-            { name: "DHA Phase 4", lat: 31.4678, lng: 74.3995 },
-            { name: "DHA Phase 5", lat: 31.4704, lng: 74.4485 },
-            { name: "DHA Phase 6", lat: 31.4836, lng: 74.4789 },
-            { name: "DHA Phase 7 & 8", lat: 31.4485, lng: 74.4852 },
-            { name: "Johar Town", lat: 31.4697, lng: 74.2728 },
-            { name: "Model Town", lat: 31.4914, lng: 74.3272 },
-            { name: "Lahore Cantt", lat: 31.5283, lng: 74.3922 },
-            { name: "Sadar Bazaar", lat: 31.5342, lng: 74.3451 },
-            { name: "Mall Road", lat: 31.5580, lng: 74.3297 },
-            { name: "Badshahi Mosque / Walled City", lat: 31.5880, lng: 74.3106 },
-            { name: "Old Anarkali", lat: 31.5644, lng: 74.3142 },
-            { name: "Liberty Market", lat: 31.5126, lng: 74.3406 },
-            { name: "Gulshan-e-Ravi", lat: 31.5522, lng: 74.2886 },
-            { name: "Samanabad", lat: 31.5375, lng: 74.3005 },
-            { name: "Allama Iqbal Town", lat: 31.5085, lng: 74.2842 },
-            { name: "Wapda Town", lat: 31.4428, lng: 74.2652 },
-            { name: "Bahria Town Lahore", lat: 31.3789, lng: 74.1873 },
-            { name: "Raiwind Road", lat: 31.3922, lng: 74.2405 },
-            { name: "Ferozepur Road", lat: 31.5032, lng: 74.3312 },
-            { name: "Baghbanpura", lat: 31.5815, lng: 74.3792 },
-            { name: "Garhi Shahu", lat: 31.5645, lng: 74.3533 },
-            { name: "Data Darbar", lat: 31.5772, lng: 74.3079 },
-            { name: "Garden Town", lat: 31.5002, lng: 74.3121 },
-            { name: "Faisal Town", lat: 31.4879, lng: 74.3065 },
-            { name: "Muslim Town", lat: 31.5178, lng: 74.3195 },
-            { name: "Township", lat: 31.4602, lng: 74.3120 },
-            { name: "Valencia Town", lat: 31.4289, lng: 74.2801 }
-        ];
+function addModalToCart() {
+  const idx = document.getElementById('modal-variant-select').value;
+  const opt = currentActiveFilteredOptions[idx];
+  cart.push({
+    name: `${currentSelectedProduct.name} (${opt.name})`,
+    price: opt.price,
+    image: currentSelectedProduct.image,
+    qty: 1
+  });
+  updateCartUI();
+  closeOptionsModal();
+  toggleCart();
+}
 
-        const bottleOptions = [
-            { name: "3 ML Bottle (Normal)", price: 200 },
-            { name: "3 ML Bottle (Special)", price: 350 },
-            { name: "6 ML Bottle (Normal)", price: 350 },
-            { name: "6 ML Bottle (Special)", price: 600 },
-            { name: "Tola Bottle (Normal)", price: 600 },
-            { name: "Tola Bottle (Special)", price: 1000 },
-            { name: "Plastic Bottle (Normal)", price: 150 },
-            { name: "Plastic Bottle (Special)", price: 250 }
-        ];
+function buyModalInstant() {
+  addModalToCart();
+  toggleCart();
+  openCheckoutModal();
+}
 
-        const luxuryProducts = [
-            { id: 101, name: "Turkey Gulab", tag: "Supreme", notes: "Exquisite Rich Turkish Rose Extract", image: "turkey gulab.jpeg" },
-            { id: 102, name: "White Oud", tag: "Supreme", notes: "Sublime Woody & Clean Oriental Scent", image: "white Aud.jpeg" },
-            { id: 103, name: "Silver", tag: "Luxury", notes: "Crisp, Metallic & Sophisticated", image: "silver.jpeg" },
-            { id: 104, name: "Cool Breeze", tag: "Signature", notes: "Refreshing Aquatic & Breezy Aura", image: "cool breeze.jpeg" },
-            { id: 105, name: "Jinnan", tag: "Supreme", notes: "Deep Traditional Royal Blend", image: "jinnan.jpeg" },
-            { id: 106, name: "Baka Raat Special", tag: "Elite", notes: "Intense Amber & Sweet Floral Sillage", image: "baka raat2.jpeg" },
-            { id: 107, name: "auud Spreme", tag: "Masterpiece", notes: "Pure Aged Concentrated Oud", image: "auud spreme.jpeg" }
-        ];
+function addGiftBoxToCart(id) {
+  const p = giftBoxProducts.find(item => item.id === id);
+  cart.push({
+    name: p.name,
+    price: p.price,
+    image: p.image,
+    qty: 1
+  });
+  updateCartUI();
+  toggleCart();
+}
 
-        const giftBoxProducts = [
-            { id: 201, name: "Silver Box", tag: "Gift Set", price: 350, notes: "Exquisite Presentation & Fragrance", image: "silver box.jpeg" },
-            { id: 202, name: "Dun Hill", tag: "Classic", price: 350, notes: "Refined & Sophisticated Gentlemanly Scent", image: "dun hill.jpeg" },
-            { id: 203, name: "Sultan", tag: "Royal", price: 350, notes: "Majestic Oriental Blend", image: "sultan.jpeg" },
-            { id: 204, name: "Blue Oud", tag: "Exclusive", price: 350, notes: "Deep Aquatic Notes with Rich Oud", image: "blue aud.jpeg" },
-            { id: 205, name: "D Loves Attar", tag: "Special Edition", price: 350, notes: "Romance & Deep Sensual Notes", image: "D loves attar.jpeg" },
-            { id: 206, name: "Ateeq", tag: "Heritage", price: 350, notes: "Traditional Timeless Arabian Attar", image: "Ateeq.jpeg" },
-            { id: 207, name: "Black Boss", tag: "Power", price: 350, notes: "Bold, Intense & Dominant", image: "black boss.jpeg" },
-            { id: 208, name: "Galaf E Kabha Box", tag: "Collector's Box", price: 350, notes: "Sacred & Pure Luxurious Essence", image: "Galaf e kabha box.jpeg" }
-        ];
+function buyGiftBoxInstant(id) {
+  addGiftBoxToCart(id);
+  toggleCart();
+  openCheckoutModal();
+}
 
-        const products = [
-            { id: 1, name: "Ameer Ul Uudd", tag: "Premium", notes: "Rich, Woody & Elegant", image: "ameer ul uudd.jpeg" },
-            { id: 2, name: "Asseel", tag: "Classic", notes: "Traditional Bold Scent", image: "asseel.jpeg" },
-            { id: 3, name: "Baka Raat", tag: "Luxury", notes: "Sweet Floral & Woody", image: "baka raat.jpeg" },
-            { id: 4, name: "Broot", tag: "Men's Classic", notes: "Fresh, Spicy & Aromatic", image: "broot.jpeg" },
-            { id: 5, name: "Chocolate", tag: "Sweet", notes: "Rich Gourmand Notes", image: "Choclate.jpeg" },
-            { id: 6, name: "Fog", tag: "Fresh", notes: "Cool & Refreshing Aqua", image: "fog.jpeg" },
-            { id: 7, name: "Galaf Kabha", tag: "Spiritual", notes: "Pure Oud & Musk", image: "galaf kabha.jpeg" },
-            { id: 8, name: "Gucci Rush", tag: "Designer", notes: "Fruity & Vibrant Floral", image: "guucci rush.jpeg" },
-            { id: 9, name: "Motia", tag: "Floral", notes: "Pure Jasmine Extract", image: "motia.jpeg" },
-            { id: 10, name: "Office Man", tag: "Everyday", notes: "Clean & Professional", image: "office man.jpeg" },
-            { id: 11, name: "Poison", tag: "Bold", notes: "Dark & Mysterious", image: "poison.jpeg" },
-            { id: 12, name: "Rooh Gulab", tag: "Floral", notes: "Premium Rose Extract", image: "rooh gulab.jpeg" },
-            { id: 13, name: "Safari", tag: "Adventure", notes: "Earthy, Woody & Strong", image: "safari.jpeg" },
-            { id: 14, name: "Tea Rozz", tag: "Fresh Floral", notes: "Light Rose & Green Tea", image: "tea rozz.jpeg" },
-            { id: 15, name: "Versachay Pink", tag: "Women's", notes: "Fresh, Fruity & Sweet", image: "versachay pink.jpeg" },
-            { id: 16, name: "Cheery", tag: "Fresh", notes: "Light & Refreshing", image: "cheery.jpeg" },
-            { id: 17, name: "Open", tag: "Luxury", notes: "Rich, Bold & Long-lasting", image: "open.jpeg" }
-        ];
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCartUI();
+}
 
-        let cart = [];
-        let currentSelectedProduct = null;
+function updateCartUI() {
+  document.getElementById('cart-count').innerText = cart.length;
+  const body = document.getElementById('cart-body');
+  body.innerHTML = '';
+  
+  if (cart.length === 0) {
+    body.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 40px;">Your shopping bag is empty</p>';
+    document.getElementById('cart-subtotal-amount').innerText = 'PKR 0';
+    document.getElementById('cart-total-amount').innerText = 'PKR 0';
+    return;
+  }
+  
+  let subtotal = 0;
+  cart.forEach((item, index) => {
+    subtotal += item.price * item.qty;
+    body.innerHTML += `
+      <div class="cart-item">
+        <img src="${item.image}" alt="" onerror="this.onerror=null; this.src='${defaultSvgImg}';">
+        <div class="cart-item-info">
+          <div class="cart-item-title">${item.name}</div>
+          <div class="cart-item-price">PKR ${item.price}</div>
+          <span class="remove-item" onclick="removeFromCart(${index})"><i class="fa-solid fa-trash"></i> Remove</span>
+        </div>
+      </div>`;
+  });
+  
+  document.getElementById('cart-subtotal-amount').innerText = `PKR ${subtotal}`;
+  let deliveryFee = 0;
+  if (subtotal >= 1000) {
+    document.getElementById('delivery-display').innerText = 'Free (Order 1000+)';
+    deliveryFee = 0;
+  } else {
+    deliveryFee = Math.round(calculatedDistanceKm * 20);
+    if (deliveryFee < 40) deliveryFee = 40;
+    document.getElementById('delivery-display').innerText = `PKR ${deliveryFee} (~${calculatedDistanceKm} km @ Rs. 20/km)`;
+  }
+  
+  calculatedDeliveryFee = deliveryFee;
+  let total = subtotal + deliveryFee;
+  document.getElementById('cart-total-amount').innerText = `PKR ${total}`;
+}
 
-        const defaultSvgImg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23c5a059' stroke-width='1.5'><path d='M6 2h12v6H6z'/><path d='M9 8v2a3 3 0 0 0 3 3 3 3 0 0 0 3-3V8'/><path d='M10 13v7h4v-7'/></svg>";
+function openCheckoutModal() {
+  if (cart.length === 0) {
+    alert('Your bag is empty!');
+    return;
+  }
+  toggleCart();
+  document.getElementById('checkout-modal').classList.add('active');
+  setTimeout(() => {
+    initMap();
+  }, 300);
+}
 
-        function renderProducts() {
-            const luxuryGrid = document.getElementById('luxury-grid');
-            luxuryGrid.innerHTML = '';
-            luxuryProducts.forEach(p => {
-                luxuryGrid.innerHTML += `
-                    <div class="product-card">
-                        <div class="product-img-wrapper">
-                            <span class="tag-badge" style="background: var(--accent-gold); color: #000;">${p.tag}</span>
-                            <img src="${p.image}" alt="${p.name}" class="product-img" onerror="this.onerror=null; this.src='${defaultSvgImg}';">
-                        </div>
-                        <div class="product-details">
-                            <div>
-                                <h3 class="product-title">${p.name}</h3>
-                                <p class="product-notes">${p.notes}</p>
-                            </div>
-                            <div>
-                                <div class="card-actions">
-                                    <button class="btn-add-cart" onclick="openOptionsModal('luxury', ${p.id})">Add to Bag</button>
-                                    <button class="btn-buy-instant" onclick="openOptionsModal('luxury', ${p.id})">Order Now</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
+function closeCheckoutModal() {
+  document.getElementById('checkout-modal').classList.remove('active');
+}
 
-            const giftboxGrid = document.getElementById('giftbox-grid');
-            giftboxGrid.innerHTML = '';
-            giftBoxProducts.forEach(p => {
-                giftboxGrid.innerHTML += `
-                    <div class="product-card">
-                        <div class="product-img-wrapper">
-                            <span class="tag-badge">${p.tag}</span>
-                            <img src="${p.image}" alt="${p.name}" class="product-img" onerror="this.onerror=null; this.src='${defaultSvgImg}';">
-                        </div>
-                        <div class="product-details">
-                            <div>
-                                <h3 class="product-title">${p.name}</h3>
-                                <div class="product-price">PKR ${p.price}</div>
-                                <p class="product-notes">${p.notes}</p>
-                            </div>
-                            <div>
-                                <div class="card-actions">
-                                    <button class="btn-add-cart" onclick="addGiftBoxToCart(${p.id})">Add to Bag</button>
-                                    <button class="btn-buy-instant" onclick="buyGiftBoxInstant(${p.id})">Order Now</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
+function initMap() {
+  if (map) {
+    map.invalidateSize();
+    return;
+  }
+  map = L.map('map').setView([shopLat, shopLng], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+  
+  L.marker([shopLat, shopLng]).addTo(map).bindPopup('<b>Imyas Perfumes Shop</b>').openPopup();
+  customerMarker = L.marker([shopLat + 0.01, shopLng + 0.01], { draggable: true }).addTo(map);
+  customerMarker.bindPopup('Drag to your exact location!').openPopup();
+  
+  customerMarker.on('dragend', function() {
+    const pos = customerMarker.getLatLng();
+    calculateDistanceAndFee(pos.lat, pos.lng);
+  });
+  
+  map.on('click', function(e) {
+    customerMarker.setLatLng(e.latlng);
+    calculateDistanceAndFee(e.latlng.lat, e.latlng.lng);
+  });
+  
+  calculateDistanceAndFee(shopLat + 0.01, shopLng + 0.01);
+}
 
-            const productsGrid = document.getElementById('products-grid');
-            productsGrid.innerHTML = '';
-            products.forEach(p => {
-                productsGrid.innerHTML += `
-                    <div class="product-card">
-                        <div class="product-img-wrapper">
-                            <span class="tag-badge">${p.tag}</span>
-                            <img src="${p.image}" alt="${p.name}" class="product-img" onerror="this.onerror=null; this.src='${defaultSvgImg}';">
-                        </div>
-                        <div class="product-details">
-                            <div>
-                                <h3 class="product-title">${p.name}</h3>
-                                <p class="product-notes">${p.notes}</p>
-                            </div>
-                            <div>
-                                <div class="card-actions">
-                                    <button class="btn-add-cart" onclick="openOptionsModal('regular', ${p.id})">Add to Bag</button>
-                                    <button class="btn-buy-instant" onclick="openOptionsModal('regular', ${p.id})">Order Now</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
+function calculateDistanceAndFee(lat, lng) {
+  const R = 6371;
+  const dLat = (lat - shopLat) * Math.PI / 180;
+  const dLon = (lng - shopLng) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(shopLat * Math.PI / 180) * Math.cos(lat * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const d = R * c;
+  
+  calculatedDistanceKm = parseFloat(d.toFixed(1));
+  if (calculatedDistanceKm < 0.5) calculatedDistanceKm = 1.0;
+  
+  document.getElementById('distance-info').innerText = `Distance from Shop: ~${calculatedDistanceKm} km`;
+  updateCartUI();
+}
 
-        function toggleCart() {
-            document.getElementById('cart-drawer').classList.toggle('active');
-            document.getElementById('cart-overlay').classList.toggle('active');
-        }
+function handleGoogleSearchInput() {
+  const query = document.getElementById('area-search-input').value.toLowerCase().trim();
+  const list = document.getElementById('autocomplete-list');
+  list.innerHTML = '';
+  
+  if (query.length === 0) {
+    list.style.display = 'none';
+    return;
+  }
+  
+  const matches = lahoreAreas.filter(a => a.name.toLowerCase().includes(query));
+  if (matches.length === 0) {
+    list.style.display = 'none';
+    return;
+  }
+  
+  matches.forEach(m => {
+    const div = document.createElement('div');
+    div.className = 'autocomplete-item';
+    div.innerHTML = `<i class="fa-solid fa-location-dot" style="color: var(--accent-gold-dark); margin-right: 8px;"></i> ${m.name}`;
+    div.onclick = function() {
+      document.getElementById('area-search-input').value = m.name;
+      list.style.display = 'none';
+      if (map) {
+        map.setView([m.lat, m.lng], 14);
+        customerMarker.setLatLng([m.lat, m.lng]);
+        calculateDistanceAndFee(m.lat, m.lng);
+      }
+    };
+    list.appendChild(div);
+  });
+  
+  list.style.display = 'block';
+}
 
-        function openOptionsModal(type, id) {
-            let p = null;
-            if (type === 'luxury') p = luxuryProducts.find(item => item.id === id);
-            else p = products.find(item => item.id === id);
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.google-search-container')) {
+    const list = document.getElementById('autocomplete-list');
+    if (list) list.style.display = 'none';
+  }
+});
 
-            currentSelectedProduct = p;
-            document.getElementById('modal-product-name').innerText = p.name;
-            document.getElementById('modal-product-desc').innerText = p.notes;
-            const modalImg = document.getElementById('modal-product-img');
-            modalImg.src = p.image;
-            modalImg.onerror = function() { this.src = defaultSvgImg; };
+function submitOrder(e) {
+  e.preventDefault();
+  const name = document.getElementById('cust-name').value;
+  const phone = document.getElementById('cust-phone').value;
+  const city = document.getElementById('cust-city').value;
+  const address = document.getElementById('cust-address').value;
+  const whatsappNumber = document.getElementById('whatsapp-choice').value;
+  
+  let subtotal = 0;
+  let itemsText = '';
+  cart.forEach((item, idx) => {
+    subtotal += item.price * item.qty;
+    itemsText += `${idx + 1}. ${item.name} (Qty: ${item.qty}) PKR ${item.price * item.qty}\n`;
+  });
+  
+  let deliveryFee = calculatedDeliveryFee;
+  if (subtotal >= 1000) deliveryFee = 0;
+  
+  let totalAmount = subtotal + deliveryFee;
+  let deliveryText = deliveryFee === 0 ? 'Free (Order PKR 1,000+)' : `PKR ${deliveryFee} (~${calculatedDistanceKm} km @ Rs. 20/km)`;
+  
+  const message = `*NEW ORDER - IMYAS PERFUMES*\n\n` +
+    `*CUSTOMER DETAILS:*\n` +
+    `Customer Name: ${name}\n` +
+    `Phone / WhatsApp: ${phone}\n\n` +
+    `*ORDER ITEMS:*\n${itemsText}\n` +
+    `*CUSTOMER DELIVERY DETAILS:*\n` +
+    `Calculated Distance: ~${calculatedDistanceKm} km from Shop (Ghaziabad/Tajpura)\n` +
+    `Subtotal: PKR ${subtotal}\n` +
+    `Delivery Charges: ${deliveryText}\n` +
+    `Total Amount: PKR ${totalAmount}\n` +
+    `PAYMENT METHOD: Cash on Delivery (COD)\n\n` +
+    `*SHIPPING & DELIVERY ADDRESS:*\n` +
+    `City: ${city}\n` +
+    `Complete Address: ${address}\n\n` +
+    `Please confirm my order!`;
+    
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+  window.open(whatsappUrl, '_blank');
+}
 
-            const select = document.getElementById('modal-variant-select');
-            select.innerHTML = '';
-            bottleOptions.forEach((opt, idx) => {
-                select.innerHTML += `<option value="${idx}">${opt.name} - PKR ${opt.price}</option>`;
-            });
-
-            updateModalPrice();
-            document.getElementById('options-modal').classList.add('active');
-        }
-
-        function updateModalPrice() {
-            const idx = document.getElementById('modal-variant-select').value;
-            const opt = bottleOptions[idx];
-            document.getElementById('modal-variant-price').innerText = `PKR ${opt.price}`;
-        }
-
-        function closeOptionsModal() {
-            document.getElementById('options-modal').classList.remove('active');
-        }
-
-        function addModalToCart() {
-            const idx = document.getElementById('modal-variant-select').value;
-            const opt = bottleOptions[idx];
-            
-            cart.push({
-                name: `${currentSelectedProduct.name} (${opt.name})`,
-                price: opt.price,
-                image: currentSelectedProduct.image,
-                qty: 1
-            });
-            updateCartUI();
-            closeOptionsModal();
-            toggleCart();
-        }
-
-        function buyModalInstant() {
-            addModalToCart();
-            toggleCart();
-            openCheckoutModal();
-        }
-
-        function addGiftBoxToCart(id) {
-            const p = giftBoxProducts.find(item => item.id === id);
-            cart.push({
-                name: p.name,
-                price: p.price,
-                image: p.image,
-                qty: 1
-            });
-            updateCartUI();
-            toggleCart();
-        }
-
-        function buyGiftBoxInstant(id) {
-            addGiftBoxToCart(id);
-            toggleCart();
-            openCheckoutModal();
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            document.getElementById('cart-count').innerText = cart.length;
-            const body = document.getElementById('cart-body');
-            body.innerHTML = '';
-
-            if (cart.length === 0) {
-                body.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 40px;">Your shopping bag is empty.</p>';
-                document.getElementById('cart-subtotal-amount').innerText = 'PKR 0';
-                document.getElementById('cart-total-amount').innerText = 'PKR 0';
-                return;
-            }
-
-            let subtotal = 0;
-            cart.forEach((item, index) => {
-                subtotal += item.price * item.qty;
-                body.innerHTML += `
-                    <div class="cart-item">
-                        <img src="${item.image}" alt="" onerror="this.onerror=null; this.src='${defaultSvgImg}';">
-                        <div class="cart-item-info">
-                            <div class="cart-item-title">${item.name}</div>
-                            <div class="cart-item-price">PKR ${item.price}</div>
-                            <span class="remove-item" onclick="removeFromCart(${index})"><i class="fa-solid fa-trash"></i> Remove</span>
-                        </div>
-                    </div>
-                `;
-            });
-
-            document.getElementById('cart-subtotal-amount').innerText = `PKR ${subtotal}`;
-
-            let deliveryFee = 0;
-            if (subtotal >= 1000) {
-                document.getElementById('delivery-display').innerText = 'Free (Order 1000+)';
-                deliveryFee = 0;
-            } else {
-                deliveryFee = Math.round(calculatedDistanceKm * 20);
-                if(deliveryFee < 40) deliveryFee = 40; 
-                document.getElementById('delivery-display').innerText = `PKR ${deliveryFee} (~${calculatedDistanceKm} km @ Rs. 20/km)`;
-            }
-
-            calculatedDeliveryFee = deliveryFee;
-            let total = subtotal + deliveryFee;
-            document.getElementById('cart-total-amount').innerText = `PKR ${total}`;
-        }
-
-        function openCheckoutModal() {
-            if (cart.length === 0) {
-                alert('Your bag is empty!');
-                return;
-            }
-            toggleCart();
-            document.getElementById('checkout-modal').classList.add('active');
-            setTimeout(() => {
-                initMap();
-            }, 300);
-        }
-
-        function closeCheckoutModal() {
-            document.getElementById('checkout-modal').classList.remove('active');
-        }
-
-        function initMap() {
-            if (map) {
-                map.invalidateSize();
-                return;
-            }
-            map = L.map('map').setView([shopLat, shopLng], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors'
-            }).addTo(map);
-
-            L.marker([shopLat, shopLng]).addTo(map).bindPopup('<b>Imyas Perfumes Shop</b>').openPopup();
-
-            customerMarker = L.marker([shopLat + 0.01, shopLng + 0.01], { draggable: true }).addTo(map);
-            customerMarker.bindPopup('Drag to your exact location!').openPopup();
-
-            customerMarker.on('dragend', function(e) {
-                const pos = customerMarker.getLatLng();
-                calculateDistanceAndFee(pos.lat, pos.lng);
-            });
-
-            map.on('click', function(e) {
-                customerMarker.setLatLng(e.latlng);
-                calculateDistanceAndFee(e.latlng.lat, e.latlng.lng);
-            });
-
-            calculateDistanceAndFee(shopLat + 0.01, shopLng + 0.01);
-        }
-
-        function calculateDistanceAndFee(lat, lng) {
-            const R = 6371; 
-            const dLat = (lat - shopLat) * Math.PI / 180;
-            const dLon = (lng - shopLng) * Math.PI / 180;
-            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                      Math.cos(shopLat * Math.PI / 180) * Math.cos(lat * Math.PI / 180) *
-                      Math.sin(dLon/2) * Math.sin(dLon/2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            const d = R * c;
-
-            calculatedDistanceKm = parseFloat(d.toFixed(1));
-            if(calculatedDistanceKm < 0.5) calculatedDistanceKm = 1.0; 
-
-            document.getElementById('distance-info').innerText = `Distance from Shop: ~${calculatedDistanceKm} km`;
-            updateCartUI();
-        }
-
-        function handleGoogleSearchInput() {
-            const query = document.getElementById('area-search-input').value.toLowerCase().trim();
-            const list = document.getElementById('autocomplete-list');
-            list.innerHTML = '';
-
-            if (query.length === 0) {
-                list.style.display = 'none';
-                return;
-            }
-
-            const matches = lahoreAreas.filter(a => a.name.toLowerCase().includes(query));
-            if (matches.length === 0) {
-                list.style.display = 'none';
-                return;
-            }
-
-            matches.forEach(m => {
-                const div = document.createElement('div');
-                div.className = 'autocomplete-item';
-                div.innerHTML = `<i class="fa-solid fa-location-dot" style="color: var(--accent-gold); margin-right: 8px;"></i> ${m.name}`;
-                div.onclick = function() {
-                    document.getElementById('area-search-input').value = m.name;
-                    list.style.display = 'none';
-                    if (map) {
-                        map.setView([m.lat, m.lng], 14);
-                        customerMarker.setLatLng([m.lat, m.lng]);
-                        calculateDistanceAndFee(m.lat, m.lng);
-                    }
-                };
-                list.appendChild(div);
-            });
-            list.style.display = 'block';
-        }
-
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.google-search-container')) {
-                const list = document.getElementById('autocomplete-list');
-                if(list) list.style.display = 'none';
-            }
-        });
-
-        function submitOrder(e) {
-            e.preventDefault();
-            const name = document.getElementById('cust-name').value;
-            const phone = document.getElementById('cust-phone').value;
-            const city = document.getElementById('cust-city').value;
-            const address = document.getElementById('cust-address').value;
-            const whatsappNumber = document.getElementById('whatsapp-choice').value;
-
-            let subtotal = 0;
-            let itemsText = '';
-            cart.forEach((item, idx) => {
-                subtotal += item.price * item.qty;
-                itemsText += `${idx + 1}. ${item.name} (Qty: ${item.qty}) - PKR ${item.price * item.qty}
-`;
-            });
-
-            let deliveryFee = calculatedDeliveryFee;
-            if (subtotal >= 1000) deliveryFee = 0;
-            let totalAmount = subtotal + deliveryFee;
-
-            let deliveryText = deliveryFee === 0 ? 'Free (Order PKR 1,000+)' : `PKR ${deliveryFee} (~${calculatedDistanceKm} km @ Rs. 20/km)`;
-
-            const message = `*NEW ORDER - IMYAS PERFUMES*
-
-` +
-                            `*CUSTOMER DETAILS:*
-` +
-                            `Customer Name: ${name}
-` +
-                            `Phone / WhatsApp: ${phone}
-
-` +
-                            `*ORDER ITEMS:*
-` +
-                            itemsText + `
-` +
-                            `*CUSTOMER DELIVERY DETAILS:*
-` +
-                            `Calculated Distance: ~${calculatedDistanceKm} km from Shop (Ghaziabad/Tajpura)
-` +
-                            `Subtotal: PKR ${subtotal}
-` +
-                            `Delivery Charges: ${deliveryText}
-` +
-                            `Total Amount: PKR ${totalAmount}
-` +
-                            `PAYMENT METHOD: Cash on Delivery (COD)
-
-` +
-                            `*SHIPPING & DELIVERY ADDRESS:*
-` +
-                            `City: ${city}
-` +
-                            `Complete Address: ${address}
-
-` +
-                            `Please confirm my order!`;
-
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-            window.open(whatsappUrl, '_blank');
-        }
-
-        window.onload = function() {
-            renderProducts();
-        };
-    </script>
+window.onload = function() {
+  renderProducts();
+};
+</script>
 </body>
 </html>
